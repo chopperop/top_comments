@@ -7,9 +7,8 @@
 	<% commentLink = comment[:href] %>
 	<% @titlesIntArray.delete(random) %>
 	<%#= @titlesIntArray %>
-	Title is: <%= link_to title.text, comment[:href] %> 
+	Title is: <%= link_to title.text, comment[:href] %> &#160; &#160; &#160;<span style="font-size: 80%"><%= link_to comment.text, comment[:href] %></span>
 	<br>
-	<span style="font-size: 80%"><%= link_to comment.text, comment[:href] %></span>
 	<% clickPage = @page.link_with(:href => commentLink).click %>
 	<% authorsArray = clickPage.search(".tagline > a.author") %>
 	<% author = authorsArray[1].text  %>
@@ -18,7 +17,7 @@
 	<% timeArray = clickPage.search(".tagline > time") %>
 	<% time = timeArray[0].text %>
 	<%#= clickPage.search(".tagline")[1] %>
-	<br>
+	
 	<%= author %> <%= points %> <%= time + " ago" %>
 	<br>
 	<br>
