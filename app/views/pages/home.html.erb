@@ -1,24 +1,49 @@
 <%# for i in 0..(@titles.to_a.count-1) %>
-<% for i in 0..(2) %>
+<% for i in 0..(3) %>
 	<% random = @titlesIntArray.shuffle.first.to_i %>
-	<%#= random %>
 	<% title = @titles[random] %>
 	<% comment = @comments[random] %>
 	<% commentLink = comment[:href] %>
 	<% @titlesIntArray.delete(random) %>
-	<%#= @titlesIntArray %>
-	Title is: <%= link_to title.text, comment[:href] %> &#160; &#160; &#160;<span style="font-size: 80%"><%= link_to comment.text, comment[:href] %></span>
-	<br>
-	<% clickPage = @page.link_with(:href => commentLink).click %>
-	<% authorsArray = clickPage.search(".tagline > a.author") %>
-	<% author = authorsArray[1].text  %>
-	<% pointsArray = clickPage.search(".tagline > span.score.unvoted") %>
-	<% points = pointsArray[0].text %>
-	<% timeArray = clickPage.search(".tagline > time") %>
-	<% time = timeArray[0].text %>
-	<%#= clickPage.search(".tagline")[1] %>
 	
-	<%= author %> <%= points %> <%= time + " ago" %>
+	<span style="font-size: 120%"><%= link_to title.text, comment[:href] %></span> 
+	<br>
+	
+	<span style="font-size: 80%"><%= link_to comment.text, comment[:href] %></span>
+	<br>
+	
+	<% clickPage = @page.link_with(:href => commentLink).click %>
+	<% parent = clickPage.search(".sitetable.nestedlisting") %>
+	
+	<% authorsArray = parent.css(".tagline > a.author") %>
+	
+	<% rand = rand(0..(authorsArray.count/3)) %>
+	
+	<% check = authorsArray[rand] %>
+	
+	<% until check.parent.parent.parent.parent.parent.parent[:class] != "child" do %>
+		<% rand = rand(0..(authorsArray.count/3)) %>
+		<% check = authorsArray[rand] %>
+	<% end %>
+	
+	<% author = authorsArray[rand].text %>
+	<% pointsArray = parent.css(".tagline > span.score.unvoted") %>
+	<% points = pointsArray[rand].text %>
+	<% timeArray = parent.css(".tagline > time") %>
+	<% time = timeArray[rand].text %>
+
+	&#160; &#160; <%= author %> &#160; &#160; <%= points %> &#160; <%= time + " ago" %>
+	<br>
+	<br>
+
+	<% clickCommentsArray = parent.css(".md")[rand] %>
+	<% clickP = clickCommentsArray.css("p") %>
+
+	<% for p in clickP %>
+		&#160; &#160; &#160; &#160; <%= p.text %>
+		<br>
+	<% end %>
+
 	<br>
 	<br>
 <% end  %>	
