@@ -17,56 +17,24 @@
 	
 	<% authorsArray = parent.css(".tagline > a.author") %>
 	
-	<% rand = rand(0..(authorsArray.count*0.50)) %>
-	
-	<% check = authorsArray[rand] %>
-	
-	<% if check.parent.parent.parent.parent.parent.parent[:class] != "child" %>
-		<% author = authorsArray[rand].text %>
-		<% pointsArray = parent.css(".tagline > span.score.unvoted") %>
-		<% points = pointsArray[rand].text %>
-		<% timeArray = parent.css(".tagline > time") %>
-		<% time = timeArray[rand].text %>
+	<% author = authorsArray.first.text %>
+	<% pointsArray = parent.css(".tagline > span.score.unvoted") %>
+	<% points = pointsArray.first.text %>
+	<% timeArray = parent.css(".tagline > time") %>
+	<% time = timeArray.first.text %>
 
-		&#160; &#160; <%= author %> &#160; &#160; <%= points %> &#160; <%= time + " ago" %>
-		<br>
-		<br>
+	&#160; &#160; <%= author %> &#160; &#160; <%= points %> &#160; <%= time + " ago" %>
+	<br>
+	<br>
 
-		<% clickCommentsArray = parent.css(".md")[rand] %>
-		<% clickP = clickCommentsArray.css("p") %>
+	<% clickCommentsArray = parent.css(".md").first %>
+	<% clickP = clickCommentsArray.css("p") %>
 
-		<% for p in clickP %>
-			&#160; &#160; &#160; &#160; <%= p.text %>
-			<br>
-		<% end %>
-
-		<br>
-		<br>
-	<% else %>
-		<% until check.parent.parent.parent.parent.parent.parent[:class] != "child" do %>
-			<% rand = rand(0..(authorsArray.count*0.50)) %>
-			<% check = authorsArray[rand] %>
-		<% end %>
-	
-		<% author = authorsArray[rand].text %>
-		<% pointsArray = parent.css(".tagline > span.score.unvoted") %>
-		<% points = pointsArray[rand].text %>
-		<% timeArray = parent.css(".tagline > time") %>
-		<% time = timeArray[rand].text %>
-
-		&#160; &#160; <%= author %> &#160; &#160; <%= points %> &#160; <%= time + " ago" %>
-		<br>
-		<br>
-
-		<% clickCommentsArray = parent.css(".md")[rand] %>
-		<% clickP = clickCommentsArray.css("p") %>
-
-		<% for p in clickP %>
-			&#160; &#160; &#160; &#160; <%= p.text %>
-			<br>
-		<% end %>
-
-		<br>
+	<% for p in clickP %>
+		&#160; &#160; &#160; &#160; <%= p.text %>
 		<br>
 	<% end %>
+
+	<br>
+	<br>
 <% end  %>	
