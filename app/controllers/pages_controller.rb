@@ -12,13 +12,49 @@ class PagesController < ApplicationController
     #page = Nokogiri::HTML(open('http://reddit.com/'))
     @page = page
     @titles = page.search("#siteTable a.title")
-    @titlesArray = @titles.to_a
     @titlesIntArray = (0..(@titles.to_a.count-1)).to_a
-    @randomArray = @titlesIntArray.shuffle
-    random = rand(@titles.to_a.count)
+    
+    @randContainer = []
+    @titleContainer = []
+    @commentContainer = []
+    @commentLinkContainer = []
+    @pageContainer = []
+    @parentContainer = []
+    @taglineContainer = []
+    @authorContainer = []
+    @pointsContainer = []
+    @timeContainer = []
+    @clickCommentContainer = []
+    @clickPContainer = []
+    
+    for i in 0..1
+      @rand = rand(0..(@titles.count-1))
+      if @randContainer.include?(@rand) 
+        @rand = rand(0..(@titles.count-1))
+        @randContainer.push(@rand)
+      else
+        @randContainer.push(@rand)
+      end
+    end
+    
     @comments = page.search("#siteTable a.comments")
-    @commentsArray = @comments.to_a
-    #@links = page.links
+    
+    for i in 0..(@randContainer.count-1)
+      @titleContainer[i] = @titles[@randContainer[i]]
+      @commentContainer[i] = @comments[@randContainer[i]]
+      @commentLinkContainer[i] = @commentContainer[i][:href]
+      @pageContainer[i] = agent.get(@commentLinkContainer[i])
+      @parentContainer[i] = @pageContainer[i].search(".sitetable.nestedlisting")
+      
+      @taglineContainer[i] = @parentContainer[i].css(".tagline")[0]
+      
+      @authorContainer[i] = @taglineContainer[i].css("a.author")[0]
+      @pointsContainer[i] = @taglineContainer[i].css("span.score.unvoted")[0] 
+      @timeContainer[i] = @taglineContainer[i].css("time")[0]
+      @clickCommentContainer[i] = @parentContainer[i].css(".md")[0]
+      @clickPContainer[i] = @clickCommentContainer[i].css("p")
+    end
+     
   end
 
   def about
