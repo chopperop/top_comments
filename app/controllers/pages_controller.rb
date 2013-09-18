@@ -43,16 +43,6 @@ class PagesController < ApplicationController
       @titleContainer[i] = @titles[@randContainer[i]]
       @commentContainer[i] = @comments[@randContainer[i]]
       @commentLinkContainer[i] = @commentContainer[i][:href]
-      @pageContainer[i] = agent.get(@commentLinkContainer[i])
-      @parentContainer[i] = @pageContainer[i].search(".sitetable.nestedlisting")
-      
-      @taglineContainer[i] = @parentContainer[i].css(".tagline")[0]
-      
-      @authorContainer[i] = @taglineContainer[i].css("a.author")[0]
-      @pointsContainer[i] = @taglineContainer[i].css("span.score.unvoted")[0] 
-      @timeContainer[i] = @taglineContainer[i].css("time")[0]
-      @clickCommentContainer[i] = @parentContainer[i].css(".md")[0]
-      @clickPContainer[i] = @clickCommentContainer[i].css("p")
     end
      
   end
