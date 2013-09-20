@@ -1,0 +1,5 @@
+<%= @title.text %>
+<br>
+<%= @author.text %> <%= @points.text %> <%= @time.text + " ago"%> 
+<br>
+<%= @comment.text %>

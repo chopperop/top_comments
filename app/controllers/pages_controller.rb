@@ -2,49 +2,38 @@ require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 require 'mechanize'
+require 'snoo'
 
 class PagesController < ApplicationController
   def home
-    agent = Mechanize.new
-
-    page = agent.get('http://reddit.com/')
+    reddit = Snoo::Client.new
     
-    #page = Nokogiri::HTML(open('http://reddit.com/'))
-    @page = page
-    @titles = page.search("#siteTable a.title")
-    @titlesIntArray = (0..(@titles.to_a.count-1)).to_a
+    @subreddits = Reddit.all   
+    @subRand = @subreddits.sample.subreddit
     
-    @randContainer = []
-    @titleContainer = []
-    @commentContainer = []
-    @commentLinkContainer = []
-    @pageContainer = []
-    @parentContainer = []
-    @taglineContainer = []
-    @authorContainer = []
-    @pointsContainer = []
-    @timeContainer = []
-    @clickCommentContainer = []
-    @clickPContainer = []
+    rand = rand(0..24)
+    @parentLink = reddit.get_listing(subreddit: @subRand, sort: 'hot')["data"]["children"][rand]["data"]
+    @title = @parentLink["title"]
+    @numComments = @parentLink["num_comments"]
+    @url = @parentLink["permalink"]
+    @link_id = @parentLink["id"]
     
-    for i in 0..1
-      @rand = rand(0..(@titles.count-1))
-      if @randContainer.include?(@rand) 
-        @rand = rand(0..(@titles.count-1))
-        @randContainer.push(@rand)
+    
+    @firstParentComment = reddit.get_comments(link_id: @link_id, sort: "best", limit: 5)[1]["data"]["children"]
+    
+    if !@firstParentComment.empty?
+      if @firstParentComment.length >= 2
+        rand2 = rand(0..(@firstParentComment.length-2))
       else
-        @randContainer.push(@rand)
+        rand2 = 0
       end
+      @parentComment = @firstParentComment[rand2]["data"]
+      @author = @parentComment["author"]
+      @comment = @parentComment["body"]
+      @points = @parentComment["ups"]
+      @time = DateTime.strptime(@parentComment["created_utc"].to_s, '%s').to_s
     end
     
-    @comments = page.search("#siteTable a.comments")
-    
-    for i in 0..(@randContainer.count-1)
-      @titleContainer[i] = @titles[@randContainer[i]]
-      @commentContainer[i] = @comments[@randContainer[i]]
-      @commentLinkContainer[i] = @commentContainer[i][:href]
-    end
-     
   end
 
   def about

@@ -1,0 +1,62 @@
+require 'rubygems'
+require 'nokogiri'
+require 'open-uri'
+require 'mechanize'
+
+class PagesController < ApplicationController
+  def home
+    agent = Mechanize.new
+
+    page = agent.get('http://reddit.com/')
+    
+    #page = Nokogiri::HTML(open('http://reddit.com/'))
+    @page = page
+    @titles = page.search("#siteTable a.title")
+    @titlesIntArray = (0..(@titles.to_a.count-1)).to_a
+    
+    @randContainer = []
+    @titleContainer = []
+    @commentContainer = []
+    @commentLinkContainer = []
+    @pageContainer = []
+    @parentContainer = []
+    @authorContainer = []
+    @pointsContainer = []
+    @timeContainer = []
+    @clickCommentContainer = []
+    @clickPContainer = []
+    
+    for i in 0..0
+      @rand = rand(0..(@titles.count-1))
+      if @randContainer.include?(@rand) 
+        @rand = rand(0..(@titles.count-1))
+        @randContainer.push(@rand)
+      else
+        @randContainer.push(@rand)
+      end
+    end
+    
+    @comments = page.search("#siteTable a.comments")
+    
+    for i in 0..(@randContainer.count-1)
+      @titleContainer[i] = @titles[@randContainer[i]]
+      @commentContainer[i] = @comments[@randContainer[i]]
+      @commentLinkContainer[i] = @commentContainer[i][:href]
+      @pageContainer[i] = agent.get(@commentLinkContainer[i])
+      @parentContainer[i] = @pageContainer[i].search(".sitetable.nestedlisting")
+      rand = rand(0..(@parentContainer[i].css(".tagline > a.author").count-1))
+      @authorContainer[i] = @parentContainer[i].css(".tagline > a.author")[0]
+      @pointsContainer[i] = @parentContainer[i].css(".tagline > span.score.unvoted")[0] 
+      @timeContainer[i] = @parentContainer[i].css(".tagline > time")[0]
+      @clickCommentContainer[i] = @parentContainer[i].css(".md")[0]
+      @clickPContainer[i] = @clickCommentContainer[i].css("p")
+    end
+     
+  end
+
+  def about
+  end
+
+  def contact
+  end
+end

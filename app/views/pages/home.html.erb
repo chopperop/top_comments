@@ -1,9 +1,10 @@
-<%# for i in 0..(@titles.to_a.count-1) %>
-<% for i in 0..(@randContainer.count-1) %>
-	<span style="font-size: 120%"><%= link_to @titleContainer[i].text, @commentLinkContainer[i] %></span> 
-	<br>
-	
-	<span style="font-size: 80%"><%= link_to @commentContainer[i].text, @commentLinkContainer[i] %></span>
-	<br>
-	
-<% end  %>	
+<span style="font-size: 120%"><%= link_to @title, "http://www.reddit.com" + @url, target: '_blank' %></span>
+<br>
+<span style="font-size: 80%"><span style="color:darkred">Reddit</span> &#160; &#160; &#160; <%= link_to @numComments.to_s + ' comments', "http://www.reddit.com" + @url, target: '_blank' %> &#160; in &#160; <%= @subRand %></span>
+<br>
+<br>
+&#160; &#160; <%= @author %> &#160; &#160; <%= @points %> points &#160; &#160; <%= time_ago_in_words(@time) if @time %> ago
+<br>
+<br>
+&#160; &#160; &#160; &#160; <% if @comment %> <%= @comment %> <% else %> "No one has commented yet" <% end %>
+

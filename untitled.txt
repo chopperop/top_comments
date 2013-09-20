@@ -1,0 +1,18 @@
+require 'rubygems'
+require 'nokogiri'
+require 'open-uri'
+require 'mechanize'
+require 'snoo'
+
+class PagesController < ApplicationController
+  def home
+    reddit = Snoo::Client.new
+    @links = reddit.get_comments(:link_id => reddit.get_listing[10], :limit => 1)["data"]["children"][0]["data"]["link_title"]
+  end
+
+  def about
+  end
+
+  def contact
+  end
+end

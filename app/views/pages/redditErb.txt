@@ -1,0 +1,4 @@
+<%= link_to @title, "http://www.reddit.com" + @link, target: '_blank' %>
+<br>
+<br>
+<%= @comments %>
