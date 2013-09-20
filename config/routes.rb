@@ -1,5 +1,11 @@
 TopComments::Application.routes.draw do
   
+  get "reddits/index"
+  get "reddits/new"
+  get "reddits/create"
+  get "reddits/show"
+  get "reddits/destroy"
+  get "reddits/reddit_params"
   root to: 'pages#home'
   
   # The priority is based upon order of creation: first created -> highest priority.
