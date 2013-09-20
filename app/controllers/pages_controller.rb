@@ -9,7 +9,7 @@ class PagesController < ApplicationController
     reddit = Snoo::Client.new
     
     @subreddits = Reddit.all   
-    @subRand = @subreddits.sample.subreddit
+    @subRand = @subreddits.first.subreddit
     
     rand = rand(0..24)
     @parentLink = reddit.get_listing(subreddit: @subRand, sort: 'hot')["data"]["children"][rand]["data"]
