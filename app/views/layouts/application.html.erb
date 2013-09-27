@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TopComments</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <title>Stumweb: discover some of the best comments on the internet daily</title>
+  <%= stylesheet_link_tag    "bootstrap.css", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "main.css", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "bootstrap.js", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+	<div class="bottomBackground">
+		<div class="container">
+			<div class="bodyWrapper">
+				
+					<%= yield %>
+					
+			</div>
+		</div>
+	</div>
 </body>
 </html>
