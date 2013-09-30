@@ -6,9 +6,9 @@ require 'snoo'
 
 class PagesController < ApplicationController
   def home
-    if Comment.all.count == 0
-      Comment.create(:name => "clicks")
-    end
+    # if Comment.all.count == 0
+#       Comment.create(:name => "clicks")
+#     end
     
     @clicks = Comment.first
     
@@ -54,8 +54,8 @@ class PagesController < ApplicationController
         @points[i] = @parentComment["ups"]
         @time[i] = DateTime.strptime(@parentComment["created_utc"].to_s, '%s').to_s
         
-        @clicks.score += 1
-        @clicks.save
+        # @clicks.score += 1
+        # @clicks.save
       end
     end
     

@@ -1,0 +1,9 @@
+$('commentButton').bind('click', function(){
+	<% if !@firstParentComment.empty? %>
+		<% @clicks.score +=1 %>
+		<% @clicks.save %>
+	<% end %>
+})
+
+$('#score').html('<%= j render("score").html_safe %>')
+$('#comments').html('<%= j render("comments").html_safe %>')
