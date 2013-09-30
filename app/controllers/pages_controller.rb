@@ -54,8 +54,8 @@ class PagesController < ApplicationController
         @points[i] = @parentComment["ups"]
         @time[i] = DateTime.strptime(@parentComment["created_utc"].to_s, '%s').to_s
         
-        @clicks.score += 1
-        @clicks.save
+        # @clicks.score += 1
+        # @clicks.save
       end
     end
     
