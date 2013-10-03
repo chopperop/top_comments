@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stumweb: discover some of the best comments on the internet daily</title>
+  <%= stylesheet_link_tag    "bootstrap.css", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "main.css", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "bootstrap.js", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+</head>
+<body>
+	<div class="bottomBackgroundMobile">
+		<div class="container">
+			<div class="headerMobile">
+				<h1 class="headerColorMobile mobileFont header1Mobile">Stumweb</h1>
+				<h4 class="headerColorMobile header2Mobile"><%= @clicks.score %> comments discovered</h4>
+			</div>
+			<div class="bodyWrapperMobile">
+				
+					<%= yield %>
+					
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>Stumweb: discover some of the best comments on the internet daily</title>
+  <%= stylesheet_link_tag    "bootstrap.css", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "main.css", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "bootstrap.js", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="bottomBackgroundMobile">
+		<div class="containerMobile">
+			<div class="bodyWrapperMobile">
+				
+					<%= yield %>
+					
+			</div>
+		</div>
+	</div>
+</body>
+</html> -->

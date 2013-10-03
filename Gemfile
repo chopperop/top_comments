@@ -7,6 +7,7 @@ gem 'nokogiri'
 gem 'mechanize'
 gem 'newrelic_rpm'
 gem 'snoo'
+gem 'mobylette'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
