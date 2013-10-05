@@ -16,7 +16,8 @@ class PagesController < ApplicationController
       con.adapter :em_http
     end
     
-    @subreddits = Reddit.all   
+    #@subreddits = Reddit.all   
+    @subreddit = Reddit.all.sample.subreddit   
     
     @title = []
     @numComments = []
@@ -29,7 +30,8 @@ class PagesController < ApplicationController
     @subRand = []
     
     for i in 0..0
-      @subRand[i] = @subreddits.sample.subreddit
+      #@subRand[i] = @subreddits.sample.subreddit
+      @subRand[i] = @subreddit
     
       rand = rand(0..24)
       @parentLink = reddit.get_listing(subreddit: @subRand[i], sort: 'hot')["data"]["children"][rand]["data"]
