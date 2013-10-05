@@ -12,7 +12,9 @@ class PagesController < ApplicationController
     
     @clicks = Comment.first
     
-    reddit = Snoo::Client.new
+    reddit = Snoo::Client.new do |con|
+      con.adapter :em_http
+    end
     
     @subreddits = Reddit.all   
     

@@ -8,6 +8,9 @@ gem 'mechanize'
 gem 'newrelic_rpm'
 gem 'snoo'
 gem 'mobylette'
+gem 'rainbows'
+gem 'em-http-request'
+gem "faraday"
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
