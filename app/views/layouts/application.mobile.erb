@@ -14,7 +14,7 @@
 		<div class="container">
 			<div class="headerMobile">
 				<h1 class="headerColorMobile mobileFont header1Mobile">Stumweb</h1>
-				<h4 class="headerColorMobile header2Mobile"><%= @clicks.score %> comments discovered</h4>
+				<h4 class="headerColorMobile header2Mobile"><%= number_with_delimiter(@clicks.score) %> comments discovered</h4>
 			</div>
 			<div class="bodyWrapperMobile">
 				
