@@ -1,0 +1,9 @@
+##
+##  General settings
+##
+phonegap_path:             '/Users/David/Documents/phonegap-2.9.0'
+api_server:                'http://top-comments.herokuapp.com' #This will be accessible through API_SERVER global var
+
+##  Android settings
+android:
+  package:                'com.david.stumweb'

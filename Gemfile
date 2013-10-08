@@ -11,6 +11,7 @@ gem 'mobylette'
 gem 'rainbows'
 gem 'em-http-request'
 gem "faraday"
+gem 'phonegap-rails'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
@@ -58,7 +59,7 @@ end
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+ gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
