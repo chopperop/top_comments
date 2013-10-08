@@ -20,18 +20,16 @@ class PagesController < ApplicationController
     
     @title, @numComments, @url, @externalLink, @author, @comment, @points, @time, @subRand = Array.new(9){[]}
     
-    
-      @subRand = subreddits.sample
+    for i in 0..0
+      @subRand[i] = subreddits.sample
     
       rand = rand(0..24)
-      @parentLink = reddit.get_listing(subreddit: @subRand, sort: 'hot')["data"]["children"][rand]["data"]
-      @title = @parentLink["title"]
-      @numComments = @parentLink["num_comments"]
-      @url = @parentLink["permalink"]
+      @parentLink = reddit.get_listing(subreddit: @subRand[i], sort: 'hot')["data"]["children"][rand]["data"]
+      @title[i] = @parentLink["title"]
+      @numComments[i] = @parentLink["num_comments"]
+      @url[i] = @parentLink["permalink"]
       if !@parentLink["url"].include?("reddit")
-        @externalLink = @parentLink["url"]
-      else
-        @externalLink = nil
+        @externalLink[i] = @parentLink["url"]
       end
       @link_id = @parentLink["id"]
     
@@ -45,15 +43,15 @@ class PagesController < ApplicationController
           rand2 = 0
         end
         @parentComment = @firstParentComment[rand2]["data"]
-        @author = @parentComment["author"]
-        @comment = @parentComment["body"]
-        @points = @parentComment["ups"]
-        @time = DateTime.strptime(@parentComment["created_utc"].to_s, '%s').to_s
+        @author[i] = @parentComment["author"]
+        @comment[i] = @parentComment["body"]
+        @points[i] = @parentComment["ups"]
+        @time[i] = DateTime.strptime(@parentComment["created_utc"].to_s, '%s').to_s
         
         @clicks.score += 1
         @clicks.save
       end
-    
+    end
     
   end
 
