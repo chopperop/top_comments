@@ -15,13 +15,28 @@ class PagesController < ApplicationController
     reddit = Snoo::Client.new do |con|
       con.adapter :em_http
     end
-       
-    subreddits = ['all', 'drugs', 'AskReddit', 'IAmA', 'bestof', 'pettyrevenge', 'DoesAnybodyElse', 'WTF', 'aww', 'cringepics',  'JusticePorn', 'creepyPMs', 'gaming', 'Games', 'movies', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'askscience', 'YouShouldKnow', 'explainlikeimfive', 'trees', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'politics', 'worldnews', 'news', 'TrueReddit', 'technology', 'Android', 'programming', 'apple', 'dmt']
     
-   @title, @numComments, @url, @externalLink, @author, @comment, @points, @time, @subRand = Array.new(9){[]}
+    #@subreddits = Reddit.all   
+    @subreddit = Reddit.all.sample.subreddit   
+    #subreddits = ['all', 'drugs', 'AskReddit', 'IAmA', 'bestof', 'pettyrevenge', 'DoesAnybodyElse', 'WTF', 'aww', 'cringepics',  'JusticePorn', 'creepyPMs', 'gaming', 'Games', 'movies', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'askscience', 'YouShouldKnow', 'explainlikeimfive', 'trees', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'politics', 'worldnews', 'news', 'TrueReddit', 'technology', 'Android', 'programming', 'apple', 'dmt']
+    #@subreddit = subreddits.sample
+    
+    @title = []
+    @numComments = []
+    @url = []
+    @externalLink = []
+    @author = []
+    @comment = []
+    @points = []
+    @time = []
+    @subRand = []
+      #@title, @numComments, @url, @externalLink, @author, @comment, @points, @time, @subRand = [], [], [], [], [], [], [], [], []
+      #@title, @numComments, @url, @externalLink, @author, @comment, @points, @time, @subRand = Array.new(9){[]}
     
     for i in 0..0
-      @subRand[i] = subreddits.sample
+      #@subRand[i] = @subreddits.sample.subreddit
+      @subRand[i] = @subreddit
+      #@subRand[i] = subreddits.sample
     
       rand = rand(0..24)
       @parentLink = reddit.get_listing(subreddit: @subRand[i], sort: 'hot')["data"]["children"][rand]["data"]
