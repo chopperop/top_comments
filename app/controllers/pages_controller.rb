@@ -23,7 +23,7 @@ class PagesController < ApplicationController
     
     for i in 0..0
       #@subRand[i] = subreddits[subredditsRand]
-      subredditsRand = rand(0..1)
+      subredditsRand = rand(0..5)
       case subredditsRand
       when 0 
         @subRand[i] = 'all'
@@ -35,6 +35,8 @@ class PagesController < ApplicationController
         @subRand[i] = 'IAmA'
       when 4 
         @subRand[i] = 'pettyrevenge'
+      when 5 
+        @subRand[i] = 'DoesAnybodyElse'  
       end  
     
       rand = rand(0..4)
@@ -51,7 +53,7 @@ class PagesController < ApplicationController
       @firstParentComment = reddit.get_comments(link_id: @link_id, sort: "best", limit: 2)[1]["data"]["children"]
     
       if !@firstParentComment.empty?
-        if @firstParentComment.length >= 2
+        if @firstParentComment.length == 2
           rand2 = rand(0..1)
         else
           rand2 = 0
