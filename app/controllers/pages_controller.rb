@@ -17,7 +17,7 @@ class PagesController < ApplicationController
     end
        
     subreddits = ['all', 'drugs', 'AskReddit', 'IAmA', 'pettyrevenge', 'DoesAnybodyElse', 'WTF', 'aww', 'JusticePorn', 'creepyPMs', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'YouShouldKnow', 'explainlikeimfive', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'worldnews', 'news', 'technology', 'dmt']
-    subredditsRand = rand(0..26)
+    subredditsRand = rand(0..1)
     
     @title, @numComments, @url, @externalLink, @author, @comment, @points, @time, @subRand = Array.new(9){[]}
     
