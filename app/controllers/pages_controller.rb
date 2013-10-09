@@ -23,7 +23,7 @@ class PagesController < ApplicationController
     
     for i in 0..0
       #@subRand[i] = subreddits[subredditsRand]
-      subredditsRand = rand(0..4)
+      subredditsRand = rand(0..1)
       case subredditsRand
       when 0 
         @subRand[i] = 'all'
