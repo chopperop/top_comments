@@ -16,8 +16,8 @@ class PagesController < ApplicationController
       con.adapter :em_http
     end
        
-    subreddits = ['all', 'drugs', 'AskReddit', 'IAmA', 'bestof', 'pettyrevenge', 'DoesAnybodyElse', 'WTF', 'aww', 'cringepics',  'JusticePorn', 'creepyPMs', 'gaming', 'Games', 'movies', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'askscience', 'YouShouldKnow', 'explainlikeimfive', 'trees', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'politics', 'worldnews', 'news', 'TrueReddit', 'technology', 'Android', 'programming', 'apple', 'dmt']
-    subredditsRand = rand(0..39)
+    subreddits = ['all', 'drugs', 'AskReddit', 'IAmA', 'pettyrevenge', 'DoesAnybodyElse', 'WTF', 'aww', 'JusticePorn', 'creepyPMs', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'YouShouldKnow', 'explainlikeimfive', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'worldnews', 'news', 'technology', 'dmt']
+    subredditsRand = rand(0..26)
     
     @title, @numComments, @url, @externalLink, @author, @comment, @points, @time, @subRand = Array.new(9){[]}
     
