@@ -35,15 +35,15 @@ class PagesController < ApplicationController
       @link_id = @parentLink["id"]
     
     
-      @firstParentComment = reddit.get_comments(link_id: @link_id, sort: "best", limit: 5)[1]["data"]["children"]
+      @firstParentComment = reddit.get_comments(link_id: @link_id, sort: "best", limit: 1)[1]["data"]["children"]
     
       if !@firstParentComment.empty?
-        if @firstParentComment.length >= 2
-          rand2 = rand(0..(@firstParentComment.length-2))
-        else
-          rand2 = 0
-        end
-        @parentComment = @firstParentComment[rand2]["data"]
+        # if @firstParentComment.length >= 2
+#           rand2 = rand(0..(@firstParentComment.length-2))
+#         else
+#           rand2 = 0
+#         end
+        @parentComment = @firstParentComment[0]["data"]
         @author[i] = @parentComment["author"]
         @comment[i] = @parentComment["body"]
         @points[i] = @parentComment["ups"]
