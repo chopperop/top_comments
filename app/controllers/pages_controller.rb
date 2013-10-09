@@ -43,7 +43,7 @@ class PagesController < ApplicationController
         else
           rand2 = 0
         end
-        @parentComment = @firstParentComment[rand]["data"]
+        @parentComment = @firstParentComment[rand2]["data"]
         @author[i] = @parentComment["author"]
         @comment[i] = @parentComment["body"]
         @points[i] = @parentComment["ups"]
