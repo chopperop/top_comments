@@ -24,7 +24,7 @@ class PagesController < ApplicationController
       @subRand[i] = subreddits.sample
     
       rand = rand(0..24)
-      @parentLink = reddit.get_listing(subreddit: @subRand[i], sort: 'hot')["data"]["children"][0]["data"]
+      @parentLink = reddit.get_listing(subreddit: @subRand[i], sort: 'hot')["data"]["children"][rand]["data"]
       @title[i] = @parentLink["title"]
       @numComments[i] = @parentLink["num_comments"]
       @url[i] = @parentLink["permalink"]
