@@ -16,16 +16,16 @@ class PagesController < ApplicationController
       con.adapter :em_http
     end
        
-    @subreddits = ['all', 'drugs', 'AskReddit', 'IAmA', 'pettyrevenge']
-    subredditsRand = rand(0..4)
+    subreddits = ['all']
+    subredditsRand = 0
     
     @title, @numComments, @url, @externalLink, @author, @comment, @points, @time, @subRand = Array.new(9){[]}
     
     for i in 0..0
-      @subRand[i] = @subreddits[subredditsRand]
+      @subRand[i] = subreddits[subredditsRand]
     
-      rand = rand(0..4)
-      @parentLink = reddit.get_listing(subreddit: @subRand[i], limit: 5, sort: 'hot')["data"]["children"][rand]["data"]
+      rand = rand(0..24)
+      @parentLink = reddit.get_listing(subreddit: @subRand[i], sort: 'hot')["data"]["children"][rand]["data"]
       @title[i] = @parentLink["title"]
       @numComments[i] = @parentLink["num_comments"]
       @url[i] = @parentLink["permalink"]
@@ -35,15 +35,15 @@ class PagesController < ApplicationController
       @link_id = @parentLink["id"]
     
     
-      @firstParentComment = reddit.get_comments(link_id: @link_id, sort: "best", limit: 1)[1]["data"]["children"]
+      @firstParentComment = reddit.get_comments(link_id: @link_id, sort: "best", limit: 5)[1]["data"]["children"]
     
       if !@firstParentComment.empty?
-        # if @firstParentComment.length >= 2
-#           rand2 = rand(0..(@firstParentComment.length-2))
-#         else
-#           rand2 = 0
-#         end
-        @parentComment = @firstParentComment[0]["data"]
+        if @firstParentComment.length >= 2
+          rand2 = rand(0..(@firstParentComment.length-2))
+        else
+          rand2 = 0
+        end
+        @parentComment = @firstParentComment[rand2]["data"]
         @author[i] = @parentComment["author"]
         @comment[i] = @parentComment["body"]
         @points[i] = @parentComment["ups"]
