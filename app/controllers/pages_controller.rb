@@ -16,7 +16,7 @@ class PagesController < ApplicationController
       con.adapter :em_http
     end
        
-    subreddits = ['all', 'drugs', 'AskReddit', 'IAmA', 'bestof', 'pettyrevenge', 'DoesAnybodyElse', 'WTF', 'aww', 'cringepics',  'JusticePorn', 'creepyPMs', 'gaming', 'Games', 'movies', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'askscience', 'YouShouldKnow', 'explainlikeimfive', 'trees', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'politics', 'worldnews', 'news', 'TrueReddit', 'technology', 'Android', 'programming', 'apple', 'dmt']
+    subreddits = ['all', 'drugs']
     
     @title, @numComments, @url, @externalLink, @author, @comment, @points, @time, @subRand = Array.new(9){[]}
     
@@ -24,7 +24,7 @@ class PagesController < ApplicationController
       @subRand[i] = subreddits.sample
     
       rand = rand(0..24)
-      @parentLink = reddit.get_listing(subreddit: @subRand[i], sort: 'hot')["data"]["children"][rand]["data"]
+      @parentLink = reddit.get_listing(subreddit: @subRand[i], sort: 'hot')["data"]["children"][0]["data"]
       @title[i] = @parentLink["title"]
       @numComments[i] = @parentLink["num_comments"]
       @url[i] = @parentLink["permalink"]
