@@ -21,7 +21,7 @@ class PagesController < ApplicationController
     @title, @numComments, @url, @externalLink, @author, @comment, @points, @time, @subRand = Array.new(9){[]}
     
     for i in 0..0
-      @subRand[i] = subreddits.sample
+      @subRand[i] = subreddits[rand(40)]
     
       rand = rand(0..24)
       @parentLink = reddit.get_listing(subreddit: @subRand[i], sort: 'hot')["data"]["children"][rand]["data"]
