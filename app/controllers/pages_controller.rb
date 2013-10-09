@@ -16,8 +16,8 @@ class PagesController < ApplicationController
       con.adapter :em_http
     end
        
-    subreddits = ['all', 'drugs']
-    subredditsRand = rand(0..1)
+    subreddits = ['all', 'drugs', 'AskReddit', 'IAmA', 'pettyrevenge']
+    subredditsRand = rand(0..4)
     
     @title, @numComments, @url, @externalLink, @author, @comment, @points, @time, @subRand = Array.new(9){[]}
     
