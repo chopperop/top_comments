@@ -16,13 +16,25 @@ class PagesController < ApplicationController
       con.adapter :em_http
     end
        
-    subreddits = ['all']
-    subredditsRand = 0
+    #subreddits = ['all', 'drugs', 'AskReddit', 'IAmA', 'pettyrevenge', 'DoesAnybodyElse', 'WTF', 'aww', 'JusticePorn', 'creepyPMs', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'YouShouldKnow', 'explainlikeimfive', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'worldnews', 'news', 'technology', 'dmt']
+    subredditsRand = rand(0..4)
+    case subredditsRand
+    when 0 
+      @subRand[i] = 'all'
+    when 1 
+      @subRand[i] = 'drugs'
+    when 2 
+      @subRand[i] = 'AskReddit'
+    when 3 
+      @subRand[i] = 'IAmA'
+    when 4 
+      @subRand[i] = 'pettyrevenge'
+    end  
     
     @title, @numComments, @url, @externalLink, @author, @comment, @points, @time, @subRand = Array.new(9){[]}
     
     for i in 0..0
-      @subRand[i] = subreddits[subredditsRand]
+      #@subRand[i] = subreddits[subredditsRand]
     
       rand = rand(0..24)
       @parentLink = reddit.get_listing(subreddit: @subRand[i], sort: 'hot')["data"]["children"][rand]["data"]
