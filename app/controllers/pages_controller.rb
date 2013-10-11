@@ -12,21 +12,7 @@ class PagesController < ApplicationController
     
     @clicks = Comment.first
     
-    subredditsRand = rand(0..5)
-    case subredditsRand
-    when 0 
-      @subRand = 'all' #all and random
-    when 1 
-      @subRand = 'drugs'
-    when 2 
-      @subRand = 'AskReddit'
-    when 3 
-      @subRand = 'IAmA'
-    when 4 
-      @subRand = 'pettyrevenge'
-    when 5 
-      @subRand = 'DoesAnybodyElse'  
-    end  
+    @subRand = ['all', 'drugs'].sample
     
     def reddit
       
