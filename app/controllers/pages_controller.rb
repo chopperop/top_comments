@@ -12,21 +12,9 @@ class PagesController < ApplicationController
     
     @clicks = Comment.first
     
-    subredditsRand = rand(0..4)
-    case subredditsRand
-    when 0 
-      @subRand = 'all'
-    when 1 
-      @subRand = 'drugs'
-    when 2 
-      @subRand = 'AskReddit'
-    when 3 
-      @subRand = 'IAmA'
-    when 4 
-      @subRand = 'pettyrevenge'
-    when 5 
-      @subRand = 'DoesAnybodyElse'  
-    end  
+    @subreddits = ['all', 'drugs', 'AskReddit', 'IAmA', 'bestof', 'pettyrevenge', 'DoesAnybodyElse', 'WTF', 'aww', 'cringepics',  'JusticePorn', 'creepyPMs', 'gaming', 'Games', 'movies', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'askscience', 'YouShouldKnow', 'explainlikeimfive', 'trees', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'politics', 'worldnews', 'news', 'TrueReddit', 'technology', 'Android', 'programming', 'apple', 'dmt']
+    randReddit = 17 #rand(0..38)
+    @subRand = @subreddits[randReddit]
     
     def reddit
       
