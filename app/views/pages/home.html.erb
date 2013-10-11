@@ -8,21 +8,6 @@
 
 	<span class="onetwenty georgia"><%= link_to @parentLink["title"], "http://www.reddit.com" + @parentLink["permalink"], target: '_blank' %></span> &#160; &#160; 	
 	<% if @externalLink != nil %> <span class="eighty"><%= link_to "External Link", @externalLink, target: '_blank' 	     %></span> <% else %> <% end %>
-	<br>
-	<span class="eighty georgia"><span class="siteName">Reddit</span> &#160; &#160; &#160; <%= link_to @parentLink["num_comments"].to_s + ' 	 comments', "http://www.reddit.com" + @parentLink["permalink"], target: '_blank' %> &#160; in &#160; <%= @subRand %></span>
-	<br>
-	<br>
-	<div class="redditAuthor">
-		&#160; &#160; <%= @parentComment["author"] %> &#160; &#160; <%= @parentComment["ups"] %> points &#160; &#160; <%= time_ago_in_words(@time) if 		@time %> ago
-		<br>
-		<br>
-	</div>
-	<div class="redditBody georgia">
-		&#160; &#160; &#160; &#160; <% if @parentComment["body"] %> <%= @parentComment["body"] %> <% else %> "No one has commented yet" <% end %>
-		<br>
-		<br>
-		<br>
-	</div>
-
+	
 <%= link_to "Get More Comments", root_path, class: "btn btn-primary" %>
 </div>
