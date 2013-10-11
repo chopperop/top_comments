@@ -5,27 +5,13 @@
 </div>
 
 <div class="bodyPlacement">	
-<% for i in 0..(@title.count-1) %>
-	<span class="onetwenty georgia"><%= link_to @title[i], "http://www.reddit.com" + @url[i], target: '_blank' %></span> &#160; &#160; 	 <% if @externalLink[i] != nil %> <span class="eighty"><%= link_to "External Link", @externalLink[i], target: '_blank' 	     %></span> <% end %>
+<% for i in 0..(0) %>
+	<span class="onetwenty georgia"><%= link_to @title, "http://www.reddit.com" + @url, target: '_blank' %></span> &#160; &#160; 	 <% if @externalLink != nil %> <span class="eighty"><%= link_to "External Link", @externalLink, target: '_blank' 	     %></span> <% end %>
 	<br>
-	<span class="eighty georgia"><span class="siteName">Reddit</span> &#160; &#160; &#160; <%= link_to @numComments[i].to_s + ' 	 comments', "http://www.reddit.com" + @url[i], target: '_blank' %> &#160; in &#160; <%= @subRand[i] %></span>
+	<span class="eighty georgia"><span class="siteName">Reddit</span> &#160; &#160; &#160; <%= link_to @numComments.to_s + ' 	 comments', "http://www.reddit.com" + @url, target: '_blank' %> &#160; in &#160; <%= @subreddit %></span>
 	<br>
 	<br>
-	<div class="redditAuthor">
-		&#160; &#160; <%= @author[i] %> &#160; &#160; <%= @points[i] %> points &#160; &#160; <%= time_ago_in_words(@time[i]) if 		@time[i] %> ago
-		<br>
-		<br>
-	</div>
-	<div class="redditBody georgia">
-		&#160; &#160; &#160; &#160; <% if @comment[i] %> <%= @comment[i] %> <% else %> "No one has commented yet" <% end %>
-		<br>
-		<br>
-		<br>
-	</div>
 <% end %>
 
 <%= link_to "Get More Comments", root_path, class: "btn btn-primary" %>
 </div>
-<!-- <div style="position:fixed; bottom:30%; right:21.5%;">
-	<%= link_to "Get More Comments", root_path, class: "btn btn-primary" %>
-</div> -->

@@ -5,6 +5,9 @@ gem 'rails', '4.0.0'
 #gem 'open-uri'
 gem 'nokogiri'
 gem 'mechanize'
+gem 'httparty'
+gem 'httpclient'
+gem 'curb'
 gem 'newrelic_rpm'
 gem 'snoo'
 gem 'mobylette'
@@ -12,6 +15,7 @@ gem 'rainbows'
 gem 'em-http-request'
 gem "faraday"
 gem 'phonegap-rails'
+gem 'json'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
