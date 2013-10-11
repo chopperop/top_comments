@@ -35,24 +35,11 @@ class PagesController < ApplicationController
       else
         @externalLink = nil
       end
-      @link_id = @parentLink["id"]
-    
-    
-      @firstParentComment = reddit.get_comments(link_id: @link_id, sort: "best", limit: 2)[1]["data"]["children"]
-    
-      if !@firstParentComment.empty?
-        if @firstParentComment.length >= 2
-          rand2 = rand(0..(@firstParentComment.length-2))
-        else
-          rand2 = 0
-        end
-        @parentComment = @firstParentComment[rand2]["data"]
-        
-        @time = DateTime.strptime(@parentComment["created_utc"].to_s, '%s').to_s
+      
         
         @clicks.score += 1
         @clicks.save
-      end
+        
     
     
   end
