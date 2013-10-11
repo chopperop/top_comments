@@ -1,7 +1,7 @@
 require 'rubygems'
-require 'nokogiri'
-require 'open-uri'
-require 'mechanize'
+# require 'nokogiri'
+# require 'open-uri'
+# require 'mechanize'
 require 'snoo'
 
 class PagesController < ApplicationController
