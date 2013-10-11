@@ -20,6 +20,7 @@ class PagesController < ApplicationController
     #@subreddit = Reddit.all.sample.subreddit   
     subreddits = ['all', 'drugs']
     
+    @title, @numComments, @url, @externalLink, @author, @comment, @points, @time, @subRand = Array.new(9){[]}
     
     
       #@subRand = @subreddits.sample.subreddit
@@ -28,17 +29,34 @@ class PagesController < ApplicationController
     
       rand = rand(0..4)
       @parentLink = reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 5)["data"]["children"][rand]["data"]
-      
+      @title = @parentLink["title"]
+      @numComments = @parentLink["num_comments"]
+      @url = @parentLink["permalink"]
       if !@parentLink["url"].include?("reddit")
         @externalLink = @parentLink["url"]
       else
         @externalLink = nil
       end
-      
+      @link_id = @parentLink["id"]
+    
+    
+      @firstParentComment = reddit.get_comments(link_id: @link_id, sort: "best", limit: 2)[1]["data"]["children"]
+    
+      if !@firstParentComment.empty?
+        if @firstParentComment.length >= 2
+          rand2 = rand(0..(@firstParentComment.length-2))
+        else
+          rand2 = 0
+        end
+        @parentComment = @firstParentComment[rand2]["data"]
+        @author = @parentComment["author"]
+        @comment = @parentComment["body"]
+        @points = @parentComment["ups"]
+        @time = DateTime.strptime(@parentComment["created_utc"].to_s, '%s').to_s
         
         @clicks.score += 1
         @clicks.save
-        
+      end
     
     
   end
