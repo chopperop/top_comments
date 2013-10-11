@@ -12,9 +12,14 @@ class PagesController < ApplicationController
     
     @clicks = Comment.first
     
-    @subreddits = ['all']
+    def randomSub
+      @subreddits = ['all', 'drugs', 'AskReddit', 'IAmA', 'bestof', 'pettyrevenge', 'DoesAnybodyElse', 'WTF', 'aww', 'cringepics',  'JusticePorn', 'creepyPMs', 'gaming', 'Games', 'movies', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'askscience', 'YouShouldKnow', 'explainlikeimfive', 'trees', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'politics', 'worldnews', 'news', 'TrueReddit', 'technology', 'Android', 'programming', 'apple', 'dmt']
+
+      random = @subreddits.shuffle.first
+      return random
+    end
     
-    @subRand = @subreddits.shuffle.first
+    @subRand = randomSub
     
     def reddit
       
