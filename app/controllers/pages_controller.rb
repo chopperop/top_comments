@@ -25,7 +25,7 @@ class PagesController < ApplicationController
     for i in 0..0
       #@subRand[i] = @subreddits.sample.subreddit
       #@subRand[i] = @subreddit
-      @subRand[i] = subreddits.sample
+      @subRand[i] = subreddits.shuffle.first
     
       rand = rand(0..4)
       @parentLink = reddit.get_listing(subreddit: @subRand[i], sort: 'hot', limit: 5)["data"]["children"][rand]["data"]
