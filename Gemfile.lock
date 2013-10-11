@@ -183,6 +183,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.0.0)
   em-http-request
+  httparty
   jbuilder (~> 1.2)
   jquery-rails
   mobylette
