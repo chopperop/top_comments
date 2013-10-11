@@ -1,0 +1,53 @@
+<div class="bodyPlacementMobile">	
+<% for i in 0..(@title.count-1) %>
+	<span class="oneten georgia"><%= link_to @title[i], "http://www.reddit.com" + @url[i], target: '_blank' %></span> &#160; &#160; 	 <% if @externalLink[i] != nil %> <span class="eighty"><%= link_to "External Link", @externalLink[i], target: '_blank' 	     %></span> <% end %>
+	<br>
+	<span class="eighty georgia"><span class="siteName">Reddit</span> &#160; &#160; &#160; <%= link_to @numComments[i].to_s + ' 	 comments', "http://www.reddit.com" + @url[i], target: '_blank' %> &#160; in &#160; <%= @subRand[i] %></span>
+	<br>
+	<br>
+	<div class="ninety redditAuthor">
+		&#160; &#160; <%= @author[i] %> &#160; &#160; <%= @points[i] %> points &#160; &#160; <%= time_ago_in_words(@time[i]) if 		@time[i] %> ago
+		<br>
+		<br>
+	</div>
+	<div class="redditBodyMobile georgia">
+		&#160; &#160; &#160; &#160; <% if @comment[i] %> <%= @comment[i] %> <% else %> "No one has commented yet" <% end %>
+		<br>
+		<br>
+		<br>
+	</div>
+<% end %>
+
+<%= link_to "Get More Comments", root_path, class: "btn btn-primary" %>
+</div>
+
+<!-- <div class="stumBorderMobile">
+	<div class="stumHeaderMobile">
+		<h3><span class="titleMobile"><span class="stumwebMobile">Stumweb</span></span></h3>
+			<br>
+			<span class="clicksMobile"><%= @clicks.score %> comments discovered</span>
+	</div>
+</div>
+
+<div class="bodyPlacementMobile mobileText">	
+<% for i in 0..(@title.count-1) %>
+	<span class="onetwenty georgia mobileWrap"><%= link_to word_wrap(@title[i]), "http://www.reddit.com" + @url[i], target: '_blank' %></span> &#160; &#160; 	 <% if @externalLink[i] != nil %> <span class="eighty mobileWrap"><%= link_to "External Link", @externalLink[i], target: '_blank' 	     %></span> <% end %>
+	<br>
+	<span class="eighty georgia"><span class="siteName">Reddit</span> &#160; &#160; &#160; <%= link_to @numComments[i].to_s + ' 	 comments', "http://www.reddit.com" + @url[i], target: '_blank' %> &#160; in &#160; <%= @subRand[i] %></span>
+	<br>
+	<br>
+	<div class="redditAuthor">
+		&#160; &#160; <%= @author[i] %> &#160; &#160; <%= @points[i] %> points &#160; &#160; <%= time_ago_in_words(@time[i]) if 		@time[i] %> ago
+		<br>
+		<br>
+	</div>
+	<div class="redditBody georgia">
+		&#160; &#160; &#160; &#160; <% if @comment[i] %> <%= @comment[i] %> <% else %> "No one has commented yet" <% end %>
+		<br>
+		<br>
+		<br>
+	</div>
+<% end %>
+
+<%= link_to "Get More Comments", root_path, class: "btn btn-primary" %>
+</div> -->
