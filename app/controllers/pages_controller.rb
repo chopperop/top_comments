@@ -11,7 +11,7 @@ class PagesController < ApplicationController
     
     @subreddits = ['all', 'drugs', 'AskReddit', 'IAmA', 'bestof', 'pettyrevenge', 'DoesAnybodyElse', 'WTF', 'aww', 'cringepics',  'JusticePorn', 'creepyPMs', 'gaming', 'Games', 'movies', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'askscience', 'YouShouldKnow', 'explainlikeimfive', 'trees', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'politics', 'worldnews', 'news', 'TrueReddit', 'technology', 'Android', 'programming', 'apple', 'dmt']
 
-    @subRand = @subreddits.sample
+    @subRand = @subreddits.shuffle.first
     
     def reddit
       
@@ -19,8 +19,8 @@ class PagesController < ApplicationController
         con.adapter :em_http
       end
     
-      #rand = rand(0..4)
-      parent = reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 1)["data"]["children"][0]["data"]
+      rand = rand(0..4)
+      parent = reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 5)["data"]["children"][rand]["data"]
       
       @link_id = parent["id"]
       
