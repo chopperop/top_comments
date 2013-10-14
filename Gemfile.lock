@@ -63,7 +63,6 @@ GEM
     httparty (0.11.0)
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
-    httpclient (2.3.4.1)
     i18n (0.6.5)
     jbuilder (1.5.1)
       activesupport (>= 3.0.0)
@@ -185,7 +184,6 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   em-http-request
   httparty
-  httpclient
   jbuilder (~> 1.2)
   jquery-rails
   mobylette
