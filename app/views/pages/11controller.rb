@@ -19,8 +19,8 @@ class PagesController < ApplicationController
         con.adapter :em_http
       end
     
-      rand = rand(0..2)
-      parent = reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 3)["data"]["children"][rand]["data"]
+      rand = rand(0..4)
+      parent = reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 5)["data"]["children"][rand]["data"]
       
       title = parent["title"]
       numComments = parent["num_comments"]
