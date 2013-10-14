@@ -15,12 +15,13 @@ class PagesController < ApplicationController
     
     @subreddits = ['all', 'drugs', 'AskReddit', 'IAmA', 'bestof', 'pettyrevenge', 'DoesAnybodyElse', 'WTF', 'aww', 'cringepics',  'JusticePorn', 'creepyPMs', 'gaming', 'Games', 'movies', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'askscience', 'YouShouldKnow', 'explainlikeimfive', 'trees', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'politics', 'worldnews', 'news', 'TrueReddit', 'technology', 'Android', 'programming', 'apple', 'dmt']
 
-    @subRand = @subreddits.sample
+    @subRand = @subreddits[1]
     #@subRand = 'all'
     
-    @html = "http://www.reddit.com/r/#{@subRand}/.json?limit=1" 
+    @html = "http://www.reddit.com/r/#{@subRand}/.json?limit=5" 
     
-    @reddit = HTTParty.get(@html)["data"]["children"][0]["data"]["title"]
+    rand = rand(0..4)
+    @reddit = HTTParty.get(@html)["data"]["children"][rand]["data"]["title"]
     
     # def reddit
  #      
