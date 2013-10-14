@@ -19,26 +19,26 @@ class PagesController < ApplicationController
         con.adapter :em_http
       end
     
-      rand = rand(0..2)
-      parent = reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 3)["data"]["children"][rand]["data"]
+      rand = rand(0..4)
+      parent = reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 5)["data"]["children"][rand]["data"]
+      
+      title = parent["title"]
+      numComments = parent["num_comments"]
+      url = parent["permalink"]
+      if !parent["url"].include?("reddit")
+        externalLink = parent["url"]
+      else
+        externalLink = nil
+      end
       
       @link_id = parent["id"]
       
       comment = reddit.get_comments(link_id: @link_id, sort: "best", limit: 1)[1]["data"]["children"]
         
-      return parent, comment
+      return title, numComments, url, externalLink, comment
     end
     
-    @parentLink, @firstParentComment = reddit
-    
-    @title = @parentLink["title"]
-    @numComments = @parentLink["num_comments"]
-    @url = @parentLink["permalink"]
-    if !@parentLink["url"].include?("reddit")
-      @externalLink = @parentLink["url"]
-    else
-      @externalLink = nil
-    end
+    @title, @numComments, @url, @externalLink, @firstParentComment = reddit
 
     if !@firstParentComment.empty?
       @parentComment = @firstParentComment[0]["data"]
