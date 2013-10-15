@@ -16,6 +16,8 @@ gem 'em-http-request'
 # gem "faraday"
 gem 'phonegap-rails'
 # gem 'json'
+gem 'memcachier'
+gem 'dalli'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
@@ -70,3 +72,5 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'rack-mini-profiler'

@@ -45,6 +45,7 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     cookiejar (0.3.0)
+    dalli (2.6.4)
     diff-lcs (1.2.4)
     em-http-request (1.1.1)
       addressable (>= 2.3.4)
@@ -75,6 +76,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcachier (0.0.2)
     mime-types (1.25)
     mini_portile (0.5.1)
     minitest (4.7.5)
@@ -89,6 +91,8 @@ GEM
     phonegap-rails (0.0.12)
     polyglot (0.3.3)
     rack (1.5.2)
+    rack-mini-profiler (0.1.31)
+      rack (>= 1.1.3)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.0.0)
@@ -182,13 +186,16 @@ PLATFORMS
 DEPENDENCIES
   capybara
   coffee-rails (~> 4.0.0)
+  dalli
   em-http-request
   jbuilder (~> 1.2)
   jquery-rails
+  memcachier
   mobylette
   newrelic_rpm
   pg
   phonegap-rails
+  rack-mini-profiler
   rails (= 4.0.0)
   rails_12factor
   rainbows
