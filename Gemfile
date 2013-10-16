@@ -16,8 +16,9 @@ gem 'em-http-request'
 # gem "faraday"
 gem 'phonegap-rails'
 # gem 'json'
-gem 'memcachier'
-gem 'dalli'
+# gem 'memcachier'
+# gem 'dalli'
+gem 'iron_cache'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
