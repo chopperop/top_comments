@@ -9,10 +9,10 @@ class PagesController < ApplicationController
     
     @clicks = Comment.first
     
-    @subreddits = Rails.cache.fetch('subreddits') do 
-      ['all', 'drugs', 'AskReddit', 'IAmA', 'bestof', 'pettyrevenge', 'DoesAnybodyElse', 'WTF', 'aww', 'cringepics',  'JusticePorn', 'creepyPMs', 'gaming', 'Games', 'movies', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'askscience', 'YouShouldKnow', 'explainlikeimfive', 'trees', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'politics', 'worldnews', 'news', 'TrueReddit', 'technology', 'Android', 'programming', 'apple', 'dmt']
-    end
-    
+    # @subreddits = Rails.cache.fetch('subreddits') do 
+#       ['all', 'drugs', 'AskReddit', 'IAmA', 'bestof', 'pettyrevenge', 'DoesAnybodyElse', 'WTF', 'aww', 'cringepics',  'JusticePorn', 'creepyPMs', 'gaming', 'Games', 'movies', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'askscience', 'YouShouldKnow', 'explainlikeimfive', 'trees', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'politics', 'worldnews', 'news', 'TrueReddit', 'technology', 'Android', 'programming', 'apple', 'dmt']
+#     end
+    @subreddits = ['drugs']
     @subRand = @subreddits.sample
     
     reddit = Snoo::Client.new do |con|
@@ -20,7 +20,7 @@ class PagesController < ApplicationController
     end
     
     parent = Rails.cache.fetch("parent_#{@subRand}", expires_in: 2.hours) do
-      reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 25)["data"]["children"]
+      reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 3)["data"]["children"]
     end
     
     comment = Rails.cache.fetch("comment_#{@subRand}", expires_in: 2.hours) do 
@@ -33,9 +33,9 @@ class PagesController < ApplicationController
     end
     
     # Rails.cache.delete("parent_#{@subRand}")
-    # Rails.cache.delete("comment_#{@subRand}")
+ #    Rails.cache.delete("comment_#{@subRand}")
     
-    rand = rand(0..24)
+    rand = rand(0..2)
     @parentLink = parent[rand]["data"]
     @firstParentComment = comment[rand][0]["data"]
     
