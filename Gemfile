@@ -16,7 +16,7 @@ gem 'em-http-request'
 # gem "faraday"
 gem 'phonegap-rails'
 # gem 'json'
-gem 'memcachier'
+#gem 'memcachier'
 gem 'dalli'
 
 group :development, :test do
