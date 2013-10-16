@@ -4,26 +4,34 @@ require 'snoo'
 class PagesController < ApplicationController
   def home
     # if Comment.all.count == 0
-    #    Comment.create(:name => "clicks")
-    # end
+#       Comment.create(:name => "clicks")
+#     end
     
     @clicks = Comment.first
     
     @subreddits = Rails.cache.fetch('subreddits') do 
       ['all', 'drugs', 'AskReddit', 'IAmA', 'bestof', 'pettyrevenge', 'DoesAnybodyElse', 'WTF', 'aww', 'cringepics',  'JusticePorn', 'creepyPMs', 'gaming', 'Games', 'movies', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'askscience', 'YouShouldKnow', 'explainlikeimfive', 'trees', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'politics', 'worldnews', 'news', 'TrueReddit', 'technology', 'Android', 'programming', 'apple', 'dmt']
     end
-    
-    @subRand = @subreddits.sample
+    #@subreddits = ['all']
+    @subRand = @subreddits.shuffle.first
     
     reddit = Snoo::Client.new do |con|
       con.adapter :em_http
     end
     
-    parent = Rails.cache.fetch("parent_#{@subRand}", expires_in: 2.hours) do
+    # all_listings = Rails.cache.fetch('reddits') do
+#       redditsArray = []
+#       @subreddits.each do |sub|
+#         redditsArray.push(reddit.get_listing(subreddit: sub, sort: 'hot', limit: 25)["data"]["children"])
+#       end
+#       redditsArray
+#     end
+    
+    parent = Rails.cache.fetch("parent_#{@subRand}", expires_in: 3.hours) do
       reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 25)["data"]["children"]
     end
     
-    comment = Rails.cache.fetch("comment_#{@subRand}", expires_in: 2.hours) do 
+    comment = Rails.cache.fetch("comment_#{@subRand}", expires_in: 3.hours) do 
       commentsArray = []
       parent.each do |a|
         id = a["data"]["id"]
@@ -57,6 +65,7 @@ class PagesController < ApplicationController
     
       @clicks.update_attribute(:score, @clicks.score += 1)
     end
+    
   
   end
 
