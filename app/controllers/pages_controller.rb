@@ -32,8 +32,8 @@ class PagesController < ApplicationController
       commentsArray
     end
     
-    # Rails.cache.delete("parent_#{@subRand}")
- #    Rails.cache.delete("comment_#{@subRand}")
+    Rails.cache.delete("parent_#{@subRand}")
+    Rails.cache.delete("comment_#{@subRand}")
     
     rand = rand(0..24)
     @parentLink = parent[rand]["data"]
