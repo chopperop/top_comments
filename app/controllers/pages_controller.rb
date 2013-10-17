@@ -20,7 +20,7 @@ class PagesController < ApplicationController
     end
     
     parent = Rails.cache.fetch("parent_#{@subRand}", expires_in: 2.hours) do
-      reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 10)["data"]["children"]
+      reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 15)["data"]["children"]
     end
     
     comment = Rails.cache.fetch("comment_#{@subRand}", expires_in: 2.hours) do 
@@ -32,12 +32,12 @@ class PagesController < ApplicationController
       commentsArray
     end
     
-    # Rails.cache.delete("parent_#{@subRand}")
-    # Rails.cache.delete("comment_#{@subRand}")
+    Rails.cache.delete("parent_#{@subRand}")
+    Rails.cache.delete("comment_#{@subRand}")
     
-    rand = rand(0..9)
+    rand = rand(0..14)
     @parentLink = parent[rand]["data"]
-    @firstParentComment = comment[rand][0]["data"]
+    @firstParentComment = comment[rand]
     
     @title = @parentLink["title"]
     @numComments = @parentLink["num_comments"]
@@ -49,7 +49,7 @@ class PagesController < ApplicationController
     end
 
     if !@firstParentComment.empty?
-      @parentComment = @firstParentComment
+      @parentComment = @firstParentComment[0]["data"]
       @author = @parentComment["author"]
       @comment = @parentComment["body"]
       @points = @parentComment["ups"]
