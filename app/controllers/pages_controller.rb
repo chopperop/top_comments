@@ -14,7 +14,7 @@ class PagesController < ApplicationController
 #     end
     @subreddits = ['drugs']
     @subRand = @subreddits.sample
-    
+    #test
     reddit = Snoo::Client.new do |con|
       con.adapter :em_http
     end
