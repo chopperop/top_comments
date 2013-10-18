@@ -21,7 +21,7 @@ class PagesController < ApplicationController
     
     if Rails.cache.read("parent1_#{@subRand}").nil?
       parent = Rails.cache.fetch("parent2_#{@subRand}", expires_in: 2.hours) do
-        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 10)["data"]["children"]
+        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 2)["data"]["children"]
       end
     
       comment = Rails.cache.fetch("comment2_#{@subRand}", expires_in: 2.hours) do 
@@ -38,7 +38,7 @@ class PagesController < ApplicationController
       end
     else 
       parent = Rails.cache.fetch("parent2_#{@subRand}", expires_in: 2.hours) do
-        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 10)["data"]["children"]
+        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 2)["data"]["children"]
       end
     
       comment = Rails.cache.fetch("comment2_#{@subRand}", expires_in: 2.hours) do 
