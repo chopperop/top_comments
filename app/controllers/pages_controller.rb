@@ -32,8 +32,8 @@ class PagesController < ApplicationController
         end
         commentsArray
       end
-      if Rails.cache.read("parent2").nil?
-        Rails.cache.fetch("parent2", expires_in: 30.minutes) { "sending parent2 job" }
+      if Rails.cache.read("parent2_sidekiq_#{@subRand}").nil?
+        Rails.cache.fetch("parent2_sidekiq_#{@subRand}", expires_in: 30.minutes) { "sending parent2 job" }
         RedditWorker.perform_in(30.minutes, @subRand)
       end
     elsif Rails.cache.read("parent1_#{@subRand}").nil? && !Rails.cache.read("parent2_#{@subRand}").nil?
@@ -49,8 +49,8 @@ class PagesController < ApplicationController
         end
         commentsArray
       end
-      if Rails.cache.read("parent1").nil?
-        Rails.cache.fetch("parent1", expires_in: 30.minutes) { "sending parent1 job" }
+      if Rails.cache.read("parent1_sidekiq_#{@subRand}").nil?
+        Rails.cache.fetch("parent1_sidekiq_#{@subRand}", expires_in: 30.minutes) { "sending parent1 job" }
         RedditWorker.perform_in(30.minutes, @subRand)
       end  
     elsif !Rails.cache.read("parent1_#{@subRand}").nil? && Rails.cache.read("parent2_#{@subRand}").nil? 
@@ -66,8 +66,8 @@ class PagesController < ApplicationController
         end
         commentsArray
       end
-      if Rails.cache.read("parent2").nil?
-        Rails.cache.fetch("parent2", expires_in: 30.minutes) { "sending parent2 job" }
+      if Rails.cache.read("parent2_sidekiq_#{@subRand}").nil?
+        Rails.cache.fetch("parent2_sidekiq_#{@subRand}", expires_in: 30.minutes) { "sending parent2 job" }
         RedditWorker.perform_in(30.minutes, @subRand)
       end
     elsif !Rails.cache.read("parent1_#{@subRand}").nil? && !Rails.cache.read("parent2_#{@subRand}").nil? 
@@ -83,21 +83,21 @@ class PagesController < ApplicationController
         end
         commentsArray
       end
-      if Rails.cache.read("parent2").nil?
-        Rails.cache.fetch("parent2", expires_in: 30.minutes) { "sending parent2 job" }
+      if Rails.cache.read("parent2_sidekiq_#{@subRand}").nil?
+        Rails.cache.fetch("parent2_sidekiq_#{@subRand}", expires_in: 30.minutes) { "sending parent2 job" }
         RedditWorker.perform_in(30.minutes, @subRand)
       end
     end
     
-    # Rails.cache.delete('subreddits')
-#     Rails.cache.delete("parent_#{@subRand}")
-#     Rails.cache.delete("comment_#{@subRand}")
-#     Rails.cache.delete("parent1_#{@subRand}")
-#     Rails.cache.delete("comment1_#{@subRand}")
-#     Rails.cache.delete("parent1")
-#     Rails.cache.delete("parent2_#{@subRand}")
-#     Rails.cache.delete("comment2_#{@subRand}")
-#     Rails.cache.delete("parent2") 
+    Rails.cache.delete('subreddits')
+    Rails.cache.delete("parent_#{@subRand}")
+    Rails.cache.delete("comment_#{@subRand}")
+    Rails.cache.delete("parent1_#{@subRand}")
+    Rails.cache.delete("comment1_#{@subRand}")
+    Rails.cache.delete("parent1")
+    Rails.cache.delete("parent2_#{@subRand}")
+    Rails.cache.delete("comment2_#{@subRand}")
+    Rails.cache.delete("parent2") 
     
     rand = rand(0..6)
     @parentLink = parent[rand]["data"]
