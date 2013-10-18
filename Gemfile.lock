@@ -35,6 +35,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    celluloid (0.15.2)
+      timers (~> 1.1.0)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
     coffee-rails (4.0.0)
@@ -44,6 +46,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    connection_pool (1.1.0)
     cookiejar (0.3.0)
     diff-lcs (1.2.4)
     em-http-request (1.1.1)
@@ -124,6 +127,9 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    redis (3.0.5)
+    redis-namespace (1.3.1)
+      redis (~> 3.0.0)
     rest (2.6.3)
       net-http-persistent
       rest-client (>= 0.3.0)
@@ -154,6 +160,12 @@ GEM
       multi_json (~> 1.0)
       rubyzip (< 1.0.0)
       websocket (~> 1.0.4)
+    sidekiq (2.15.2)
+      celluloid (>= 0.15.2)
+      connection_pool (>= 1.0.0)
+      json
+      redis (>= 3.0.4)
+      redis-namespace (>= 1.3.1)
     snoo (0.1.2)
       httparty
       nokogiri
@@ -171,6 +183,7 @@ GEM
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
+    timers (1.1.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -206,10 +219,12 @@ DEPENDENCIES
   rails (= 4.0.0)
   rails_12factor
   rainbows
+  redis
   rspec-rails
   sass-rails (~> 4.0.0)
   sdoc
   selenium-webdriver
+  sidekiq
   snoo
   sqlite3
   turbolinks

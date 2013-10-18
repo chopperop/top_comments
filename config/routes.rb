@@ -1,3 +1,5 @@
+# require 'sidekiq/web'
+
 TopComments::Application.routes.draw do
   
   get "reddits/index"
@@ -7,6 +9,8 @@ TopComments::Application.routes.draw do
   get "reddits/destroy"
   get "reddits/reddit_params"
   root to: 'pages#home'
+    # 
+  # mount Sidekiq::Web, at: '/sidekiq'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

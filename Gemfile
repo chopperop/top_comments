@@ -19,6 +19,10 @@ gem 'phonegap-rails'
 # gem 'memcachier'
 # gem 'dalli'
 gem 'iron_cache'
+gem 'redis'
+gem 'sidekiq'
+# gem 'sinatra', require: false
+# gem 'slim'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
