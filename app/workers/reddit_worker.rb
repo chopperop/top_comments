@@ -11,11 +11,11 @@ class RedditWorker
     sub = subreddit
     
     if Rails.cache.read("parent1_#{sub}").nil?
-      Rails.cache.fetch("parent1_#{sub}", expires_in: 2.hours) do
+      Rails.cache.fetch("parent1_#{sub}", expires_in: 1.hour) do
         reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 10)["data"]["children"]
       end
     
-      Rails.cache.fetch("comment1_#{sub}", expires_in: 2.hours) do 
+      Rails.cache.fetch("comment1_#{sub}", expires_in: 1.hour) do 
         commentsArray = []
         parent.each do |a|
           id = a["data"]["id"]
@@ -24,15 +24,15 @@ class RedditWorker
         commentsArray
       end
       if Rails.cache.read("parent1").nil?
-        Rails.cache.fetch("parent1", expires_in: 1.hour) { "sending parent1 job" }
-        perform_in(1.hour, sub)
+        Rails.cache.fetch("parent1", expires_in: 30.minutes) { "sending parent1 job" }
+        perform_in(30.minutes, sub)
       end
     else 
-      Rails.cache.fetch("parent2_#{sub}", expires_in: 2.hours) do
+      Rails.cache.fetch("parent2_#{sub}", expires_in: 1.hour) do
         reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 10)["data"]["children"]
       end
     
-      Rails.cache.fetch("comment2_#{sub}", expires_in: 2.hours) do 
+      Rails.cache.fetch("comment2_#{sub}", expires_in: 1.hour) do 
         commentsArray = []
         parent.each do |a|
           id = a["data"]["id"]
@@ -41,8 +41,8 @@ class RedditWorker
         commentsArray
       end
       if Rails.cache.read("parent2").nil?
-        Rails.cache.fetch("parent2", expires_in: 1.hour) { "sending parent2 job" }
-        perform_in(1.hour, sub)
+        Rails.cache.fetch("parent2", expires_in: 30.minutes) { "sending parent2 job" }
+        perform_in(30.minutes, sub)
       end
     end
     
