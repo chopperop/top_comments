@@ -26,7 +26,8 @@ class RedditWorker
       if Rails.cache.read("parent1_sidekiq_#{sub}").nil?
         Rails.cache.fetch("parent1_sidekiq_#{sub}", expires_in: 30.minutes) { "sending parent1 job" }
         perform_in(30.minutes, sub)
-      elsif Rails.cache.read("parent2_sidekiq_#{sub}").nil?
+      end
+      if Rails.cache.read("parent2_sidekiq_#{sub}").nil?
         Rails.cache.fetch("parent2_sidekiq_#{sub}", expires_in: 30.minutes) { "sending parent2 job" }
         perform_in(30.minutes, sub)
       end
@@ -46,7 +47,8 @@ class RedditWorker
       if Rails.cache.read("parent1_sidekiq_#{sub}").nil?
         Rails.cache.fetch("parent1_sidekiq_#{sub}", expires_in: 30.minutes) { "sending parent1 job" }
         perform_in(30.minutes, sub)
-      elsif Rails.cache.read("parent2_sidekiq_#{sub}").nil?
+      end
+      if Rails.cache.read("parent2_sidekiq_#{sub}").nil?
         Rails.cache.fetch("parent2_sidekiq_#{sub}", expires_in: 30.minutes) { "sending parent2 job" }
         perform_in(30.minutes, sub)
       end
@@ -66,7 +68,8 @@ class RedditWorker
       if Rails.cache.read("parent1_sidekiq_#{sub}").nil?
         Rails.cache.fetch("parent1_sidekiq_#{sub}", expires_in: 30.minutes) { "sending parent1 job" }
         perform_in(30.minutes, sub)
-      elsif Rails.cache.read("parent2_sidekiq_#{sub}").nil?
+      end
+      if Rails.cache.read("parent2_sidekiq_#{sub}").nil?
         Rails.cache.fetch("parent2_sidekiq_#{sub}", expires_in: 30.minutes) { "sending parent2 job" }
         perform_in(30.minutes, sub)
       end

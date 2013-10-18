@@ -35,7 +35,8 @@ class PagesController < ApplicationController
       if Rails.cache.read("parent1_sidekiq_#{@subRand}").nil?
         Rails.cache.fetch("parent1_sidekiq_#{@subRand}", expires_in: 30.minutes) { "sending parent1 job" }
         RedditWorker.perform_in(30.minutes, @subRand)
-      elsif Rails.cache.read("parent2_sidekiq_#{@subRand}").nil?
+      end
+      if Rails.cache.read("parent2_sidekiq_#{@subRand}").nil?
         Rails.cache.fetch("parent2_sidekiq_#{@subRand}", expires_in: 30.minutes) { "sending parent2 job" }
         RedditWorker.perform_in(30.minutes, @subRand)
       end
@@ -55,7 +56,8 @@ class PagesController < ApplicationController
       if Rails.cache.read("parent1_sidekiq_#{@subRand}").nil?
         Rails.cache.fetch("parent1_sidekiq_#{@subRand}", expires_in: 30.minutes) { "sending parent1 job" }
         RedditWorker.perform_in(30.minutes, @subRand)
-      elsif Rails.cache.read("parent2_sidekiq_#{@subRand}").nil?
+      end
+      if Rails.cache.read("parent2_sidekiq_#{@subRand}").nil?
         Rails.cache.fetch("parent2_sidekiq_#{@subRand}", expires_in: 30.minutes) { "sending parent2 job" }
         RedditWorker.perform_in(30.minutes, @subRand)
       end  
@@ -75,7 +77,8 @@ class PagesController < ApplicationController
       if Rails.cache.read("parent1_sidekiq_#{@subRand}").nil?
         Rails.cache.fetch("parent1_sidekiq_#{@subRand}", expires_in: 30.minutes) { "sending parent1 job" }
         RedditWorker.perform_in(30.minutes, @subRand)
-      elsif Rails.cache.read("parent2_sidekiq_#{@subRand}").nil?
+      end
+      if Rails.cache.read("parent2_sidekiq_#{@subRand}").nil?
         Rails.cache.fetch("parent2_sidekiq_#{@subRand}", expires_in: 30.minutes) { "sending parent2 job" }
         RedditWorker.perform_in(30.minutes, @subRand)
       end
@@ -98,15 +101,15 @@ class PagesController < ApplicationController
 #       end
     end
     
-    # Rails.cache.delete('subreddits')
-#     Rails.cache.delete("parent_#{@subRand}")
-#     Rails.cache.delete("comment_#{@subRand}")
-#     Rails.cache.delete("parent1_#{@subRand}")
-#     Rails.cache.delete("comment1_#{@subRand}")
-#     Rails.cache.delete("parent1_sidekiq_#{@subRand}")
-#     Rails.cache.delete("parent2_#{@subRand}")
-#     Rails.cache.delete("comment2_#{@subRand}")
-#     Rails.cache.delete("parent2_sidekiq_#{@subRand}") 
+    Rails.cache.delete('subreddits')
+    Rails.cache.delete("parent_#{@subRand}")
+    Rails.cache.delete("comment_#{@subRand}")
+    Rails.cache.delete("parent1_#{@subRand}")
+    Rails.cache.delete("comment1_#{@subRand}")
+    Rails.cache.delete("parent1_sidekiq_#{@subRand}")
+    Rails.cache.delete("parent2_#{@subRand}")
+    Rails.cache.delete("comment2_#{@subRand}")
+    Rails.cache.delete("parent2_sidekiq_#{@subRand}") 
     
     rand = rand(0..6)
     @parentLink = parent[rand]["data"]
