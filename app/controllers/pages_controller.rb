@@ -64,7 +64,7 @@ class PagesController < ApplicationController
 #     Rails.cache.delete("comment2_#{@subRand}")
 #     Rails.cache.delete("parent2")
     
-    rand = rand(0..9)
+    rand = rand(0..1)
     @parentLink = parent[rand]["data"]
     @firstParentComment = comment[rand]
     
