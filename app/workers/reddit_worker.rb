@@ -12,7 +12,7 @@ class RedditWorker
     
     if Rails.cache.read("parent1_#{sub}").nil?
       Rails.cache.fetch("parent1_#{sub}", expires_in: 1.hour) do
-        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 10)["data"]["children"]
+        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 7)["data"]["children"]
       end
     
       Rails.cache.fetch("comment1_#{sub}", expires_in: 1.hour) do 
@@ -29,7 +29,7 @@ class RedditWorker
       end
     else 
       Rails.cache.fetch("parent2_#{sub}", expires_in: 1.hour) do
-        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 10)["data"]["children"]
+        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 7)["data"]["children"]
       end
     
       Rails.cache.fetch("comment2_#{sub}", expires_in: 1.hour) do 

@@ -21,7 +21,7 @@ class PagesController < ApplicationController
     
     if Rails.cache.read("parent1_#{@subRand}").nil?
       parent = Rails.cache.fetch("parent2_#{@subRand}", expires_in: 1.hour) do
-        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 10)["data"]["children"]
+        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 7)["data"]["children"]
       end
     
       comment = Rails.cache.fetch("comment2_#{@subRand}", expires_in: 1.hour) do 
@@ -38,7 +38,7 @@ class PagesController < ApplicationController
       end
     else 
       parent = Rails.cache.fetch("parent2_#{@subRand}", expires_in: 1.hour) do
-        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 10)["data"]["children"]
+        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 7)["data"]["children"]
       end
     
       comment = Rails.cache.fetch("comment2_#{@subRand}", expires_in: 1.hour) do 
@@ -57,7 +57,7 @@ class PagesController < ApplicationController
     
     if Rails.cache.read("parent1_#{@subRand}").nil?
       parent = Rails.cache.fetch("parent2_#{@subRand}", expires_in: 1.hour) do
-        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 10)["data"]["children"]
+        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 7)["data"]["children"]
       end
     
       comment = Rails.cache.fetch("comment2_#{@subRand}", expires_in: 1.hour) do 
@@ -74,7 +74,7 @@ class PagesController < ApplicationController
       end
     else 
       parent = Rails.cache.fetch("parent2_#{@subRand}", expires_in: 1.hour) do
-        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 10)["data"]["children"]
+        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 7)["data"]["children"]
       end
     
       comment = Rails.cache.fetch("comment2_#{@subRand}", expires_in: 1.hour) do 
@@ -100,7 +100,7 @@ class PagesController < ApplicationController
     Rails.cache.delete("comment2_#{@subRand}")
     Rails.cache.delete("parent2")
     
-    rand = rand(0..9)
+    rand = rand(0..6)
     @parentLink = parent[rand]["data"]
     @firstParentComment = comment[rand]
     
