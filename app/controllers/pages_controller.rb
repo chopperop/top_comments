@@ -70,17 +70,34 @@ class PagesController < ApplicationController
         Rails.cache.fetch("parent2", expires_in: 30.minutes) { "sending parent2 job" }
         RedditWorker.perform_in(30.minutes, @subRand)
       end
+    elsif !Rails.cache.read("parent1_#{@subRand}").nil? && !Rails.cache.read("parent2_#{@subRand}").nil? 
+      parent = Rails.cache.fetch("parent2_#{@subRand}", expires_in: 1.hour) do
+        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 7)["data"]["children"]
+      end
+    
+      comment = Rails.cache.fetch("comment2_#{@subRand}", expires_in: 1.hour) do 
+        commentsArray = []
+        parent.each do |a|
+          id = a["data"]["id"]
+          commentsArray.push(reddit.get_comments(link_id: id, sort: "best", limit: 1)[1]["data"]["children"])
+        end
+        commentsArray
+      end
+      if Rails.cache.read("parent2").nil?
+        Rails.cache.fetch("parent2", expires_in: 30.minutes) { "sending parent2 job" }
+        RedditWorker.perform_in(30.minutes, @subRand)
+      end
     end
     
-    # Rails.cache.delete("parent_#{@subRand}")
-#     Rails.cache.delete("comment_#{@subRand}")
-#     Rails.cache.delete("parent1_#{@subRand}")
-#     Rails.cache.delete("comment1_#{@subRand}")
-#     Rails.cache.delete("parent1")
-#     Rails.cache.delete("parent2_#{@subRand}")
-#     Rails.cache.delete("comment2_#{@subRand}")
-#     Rails.cache.delete("parent2") 
-
+    Rails.cache.delete('subreddits')
+    Rails.cache.delete("parent_#{@subRand}")
+    Rails.cache.delete("comment_#{@subRand}")
+    Rails.cache.delete("parent1_#{@subRand}")
+    Rails.cache.delete("comment1_#{@subRand}")
+    Rails.cache.delete("parent1")
+    Rails.cache.delete("parent2_#{@subRand}")
+    Rails.cache.delete("comment2_#{@subRand}")
+    Rails.cache.delete("parent2") 
     
     rand = rand(0..6)
     @parentLink = parent[rand]["data"]
