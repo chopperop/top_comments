@@ -53,11 +53,11 @@ class RedditWorker
         perform_in(30.minutes, sub)
       end
     elsif !Rails.cache.read("parent1_#{sub}").nil? && Rails.cache.read("parent2_#{sub}").nil? 
-      Rails.cache.fetch("parent1_#{sub}", expires_in: 1.hour) do
+      Rails.cache.fetch("parent2_#{sub}", expires_in: 1.hour) do
         reddit.get_listing(subreddit: sub, sort: 'hot', limit: 7)["data"]["children"]
       end
     
-      Rails.cache.fetch("comment1_#{sub}", expires_in: 1.hour) do 
+      Rails.cache.fetch("comment2_#{sub}", expires_in: 1.hour) do 
         commentsArray = []
         parent.each do |a|
           id = a["data"]["id"]

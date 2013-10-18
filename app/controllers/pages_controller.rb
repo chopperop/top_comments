@@ -101,15 +101,15 @@ class PagesController < ApplicationController
 #       end
     end
     
-    Rails.cache.delete('subreddits')
-    Rails.cache.delete("parent_#{@subRand}")
-    Rails.cache.delete("comment_#{@subRand}")
-    Rails.cache.delete("parent1_#{@subRand}")
-    Rails.cache.delete("comment1_#{@subRand}")
-    Rails.cache.delete("parent1_sidekiq_#{@subRand}")
-    Rails.cache.delete("parent2_#{@subRand}")
-    Rails.cache.delete("comment2_#{@subRand}")
-    Rails.cache.delete("parent2_sidekiq_#{@subRand}") 
+    # Rails.cache.delete('subreddits')
+#     Rails.cache.delete("parent_#{@subRand}")
+#     Rails.cache.delete("comment_#{@subRand}")
+#     Rails.cache.delete("parent1_#{@subRand}")
+#     Rails.cache.delete("comment1_#{@subRand}")
+#     Rails.cache.delete("parent1_sidekiq_#{@subRand}")
+#     Rails.cache.delete("parent2_#{@subRand}")
+#     Rails.cache.delete("comment2_#{@subRand}")
+#     Rails.cache.delete("parent2_sidekiq_#{@subRand}") 
     
     rand = rand(0..6)
     @parentLink = parent[rand]["data"]
