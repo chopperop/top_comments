@@ -20,6 +20,6 @@ class RedditWorker
     end
     Rails.cache.write("comment_#{sub}", commentsArray)
     
-    perform_in(rand(30..60).minutes, sub)
+    RedditWorker.perform_in(rand(30..60).minutes, sub)
   end
 end
