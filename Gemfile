@@ -23,6 +23,7 @@ gem 'redis'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
+gem 'rack-zippy'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
@@ -65,8 +66,6 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
-
-gem 'heroku_rails_deflate', :group => :production
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
