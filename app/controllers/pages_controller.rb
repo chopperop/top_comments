@@ -9,10 +9,10 @@ class PagesController < ApplicationController
     
     @clicks = Comment.first
     
-    # @subreddits = Rails.cache.fetch('subreddits') do 
-#       ['all', 'drugs', 'AskReddit', 'IAmA', 'bestof', 'nba', 'soccer', 'hockey', 'nfl', 'baseball', 'MMA', 'Music', 'GetMotivated', 'LifeProTips', 'food', 'facepalm', 'Jokes', 'pettyrevenge', 'TalesFromRetail', 'DoesAnybodyElse', 'WTF', 'aww', 'cringe', 'cringepics',  'JusticePorn', 'creepyPMs', 'gaming', 'Games', 'movies', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'askscience', 'YouShouldKnow', 'explainlikeimfive', 'trees', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'politics', 'worldnews', 'news', 'TrueReddit', 'technology', 'Android', 'programming', 'apple', 'dmt']
-#     end
-    @subreddits = ['wtf']
+    @subreddits = Rails.cache.fetch('subreddits') do 
+      ['all', 'drugs', 'AskReddit', 'IAmA', 'bestof', 'nba', 'soccer', 'hockey', 'nfl', 'baseball', 'MMA', 'Music', 'GetMotivated', 'LifeProTips', 'food', 'facepalm', 'Jokes', 'pettyrevenge', 'TalesFromRetail', 'DoesAnybodyElse', 'WTF', 'aww', 'cringe', 'cringepics',  'JusticePorn', 'creepyPMs', 'gaming', 'Games', 'movies', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'askscience', 'YouShouldKnow', 'explainlikeimfive', 'trees', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'politics', 'worldnews', 'news', 'TrueReddit', 'technology', 'Android', 'programming', 'apple', 'dmt']
+    end
+    #@subreddits = ['wtf']
     @subRand = @subreddits.sample
     
     reddit = Snoo::Client.new do |con|
@@ -54,8 +54,13 @@ class PagesController < ApplicationController
 #     Rails.cache.delete("parent2_sidekiq_#{@subRand}") 
     
     rand = rand(0..6)
-    @parentLink = parentComment["parent_#{@subRand}"][rand]["data"]
-    @firstParentComment = parentComment["comment_#{@subRand}"][rand]
+    if parentComment
+      @parentLink = parentComment["parent_#{@subRand}"][rand]["data"]
+      @firstParentComment = parentComment["comment_#{@subRand}"][rand]
+    else
+      @parentLink = parent[rand]["data"]
+      @firstParentComment = comment[rand]
+    end
     
     @title = @parentLink["title"]
     @numComments = @parentLink["num_comments"]
