@@ -32,29 +32,18 @@ class PagesController < ApplicationController
         end
         commentsArray
       end
-      parentComment = Rails.cache.read_multi("parent_#{@subRand}", "comment_#{@subRand}")
-      if Rails.cache.read("parent_sidekiq_#{@subRand}").nil?
-        Rails.cache.fetch("parent_sidekiq_#{@subRand}", expires_in: 30.minutes) { "sending parent job" }
-        RedditWorker.perform_in(30.minutes, @subRand)
-      end
+      parentComment = nil
+      RedditWorker.perform_in(rand(30..60).minutes, @subRand)
     else
       parentComment = Rails.cache.read_multi("parent_#{@subRand}", "comment_#{@subRand}")
     end
     
-    
-    
     # Rails.cache.delete('subreddits')
 #     Rails.cache.delete("parent_#{@subRand}")
 #     Rails.cache.delete("comment_#{@subRand}")
-#     Rails.cache.delete("parent1_#{@subRand}")
-#     Rails.cache.delete("comment1_#{@subRand}")
-#     Rails.cache.delete("parent1_sidekiq_#{@subRand}")
-#     Rails.cache.delete("parent2_#{@subRand}")
-#     Rails.cache.delete("comment2_#{@subRand}")
-#     Rails.cache.delete("parent2_sidekiq_#{@subRand}") 
     
-    rand = rand(0..6)
-    if parentComment
+    rand = rand(0..0)
+    if !parentComment.nil?
       @parentLink = parentComment["parent_#{@subRand}"][rand]["data"]
       @firstParentComment = parentComment["comment_#{@subRand}"][rand]
     else
