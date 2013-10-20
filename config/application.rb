@@ -25,7 +25,6 @@ module TopComments
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.assets.initialize_on_precompile = false
-    
     config.middleware.swap(ActionDispatch::Static, Rack::Zippy::AssetServer)
   end
 end
