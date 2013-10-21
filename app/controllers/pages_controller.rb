@@ -34,7 +34,7 @@ class PagesController < ApplicationController
       end
       parentComment = nil
       if Rails.cache.read("expire_#{@subRand}").nil?
-        RedditWorker.perform_async(@subRand)
+        RedditWorker.perform_in(1.minute, @subRand)
       end
     else
       parentComment = Rails.cache.read_multi("parent_#{@subRand}", "comment_#{@subRand}")
