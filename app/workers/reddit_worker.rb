@@ -19,7 +19,5 @@ class RedditWorker
       commentsArray.push(reddit.get_comments(link_id: id, sort: "best", limit: 1)[1]["data"]["children"])
     end
     Rails.cache.write("comment_#{sub}", commentsArray)
-    
-    RedditWorker.perform_in(rand(30..60).minutes, sub)
   end
 end

@@ -23,7 +23,8 @@ gem 'redis'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
-gem 'rack-zippy'
+# gem 'rack-zippy'
+gem 'clockwork'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
