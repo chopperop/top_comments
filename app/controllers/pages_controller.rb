@@ -15,33 +15,31 @@ class PagesController < ApplicationController
     # @subreddits = ['wtf']
     @subRand = @subreddits.sample
     
-    # reddit = Snoo::Client.new do |con|
-#       con.adapter :em_http
-#     end
-#     
-#     if Rails.cache.read("parent_#{@subRand}").nil?
-#       parent = Rails.cache.fetch("parent_#{@subRand}") do 
-#         reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 7)["data"]["children"]
-#       end
-#       
-#       comment = Rails.cache.fetch("comment_#{@subRand}") do 
-#         commentsArray = []
-#         parent.each do |a|
-#           id = a["data"]["id"]
-#           commentsArray.push(reddit.get_comments(link_id: id, sort: "best", limit: 1)[1]["data"]["children"])
-#         end
-#         commentsArray
-#       end
-#       parentComment = nil
-#     else
-#       parentComment = Rails.cache.read_multi("parent_#{@subRand}", "comment_#{@subRand}")
-#     end
+    reddit = Snoo::Client.new do |con|
+      con.adapter :em_http
+    end
+    
+    if Rails.cache.read("parent_#{@subRand}").nil?
+      parent = Rails.cache.fetch("parent_#{@subRand}") do 
+        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 7)["data"]["children"]
+      end
+      
+      comment = Rails.cache.fetch("comment_#{@subRand}") do 
+        commentsArray = []
+        parent.each do |a|
+          id = a["data"]["id"]
+          commentsArray.push(reddit.get_comments(link_id: id, sort: "best", limit: 1)[1]["data"]["children"])
+        end
+        commentsArray
+      end
+      parentComment = nil
+    else
+      parentComment = Rails.cache.read_multi("parent_#{@subRand}", "comment_#{@subRand}")
+    end
     
     # Rails.cache.delete('subreddits')
 #     Rails.cache.delete("parent_#{@subRand}")
 #     Rails.cache.delete("comment_#{@subRand}")
-
-    parentComment = Rails.cache.read_multi("parent_#{@subRand}", "comment_#{@subRand}")
     
     rand = rand(0..6)
     if !parentComment.nil?
