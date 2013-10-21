@@ -21,7 +21,7 @@ class PagesController < ApplicationController
     
     if Rails.cache.read("parent_#{@subRand}").nil?
       parent = Rails.cache.fetch("parent_#{@subRand}") do 
-        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 1)["data"]["children"]
+        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 7)["data"]["children"]
       end
       
       comment = Rails.cache.fetch("comment_#{@subRand}") do 
@@ -33,6 +33,9 @@ class PagesController < ApplicationController
         commentsArray
       end
       parentComment = nil
+      if Rails.cache.read("expire_#{@subRand}").nil?
+        RedditWorker.perform_async(@subRand)
+      end
     else
       parentComment = Rails.cache.read_multi("parent_#{@subRand}", "comment_#{@subRand}")
     end
@@ -41,7 +44,7 @@ class PagesController < ApplicationController
 #     Rails.cache.delete("parent_#{@subRand}")
 #     Rails.cache.delete("comment_#{@subRand}")
     
-    rand = rand(0..0)
+    rand = rand(0..6)
     if !parentComment.nil?
       @parentLink = parentComment["parent_#{@subRand}"][rand]["data"]
       @firstParentComment = parentComment["comment_#{@subRand}"][rand]
