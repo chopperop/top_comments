@@ -21,7 +21,7 @@ class PagesController < ApplicationController
     
     if Rails.cache.read("parent_#{@subRand}").nil?
       parent = Rails.cache.fetch("parent_#{@subRand}") do 
-        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 7)["data"]["children"]
+        reddit.get_listing(subreddit: @subRand, sort: 'hot', limit: 1)["data"]["children"]
       end
       
       comment = Rails.cache.fetch("comment_#{@subRand}") do 
@@ -41,7 +41,7 @@ class PagesController < ApplicationController
 #     Rails.cache.delete("parent_#{@subRand}")
 #     Rails.cache.delete("comment_#{@subRand}")
     
-    rand = rand(0..6)
+    rand = rand(0..0)
     if !parentComment.nil?
       @parentLink = parentComment["parent_#{@subRand}"][rand]["data"]
       @firstParentComment = parentComment["comment_#{@subRand}"][rand]

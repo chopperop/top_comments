@@ -10,7 +10,7 @@ class RedditWorker
     
     sub = subreddit
     
-    parent = reddit.get_listing(subreddit: sub, sort: 'hot', limit: 7)["data"]["children"]
+    parent = reddit.get_listing(subreddit: sub, sort: 'hot', limit: 1)["data"]["children"]
     Rails.cache.write("parent_#{sub}", parent) 
     
     commentsArray = []
