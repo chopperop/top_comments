@@ -1,0 +1,28 @@
+<div class="stumBorder">
+	<div class="stumHeader">
+		<h3><span class="stumweb">Stumweb</span>: <span class="clicks"><%= number_with_delimiter(@clicks.score) %> comments discovered</span></h3>
+	</div>
+</div>
+
+<div class="bodyPlacement">	
+
+	<span class="onetwenty georgia"><%= link_to @HNtitle, @HNurl, target: '_blank' %></span> &#160; &#160; 	 <% if @HNexternalLink != nil %> <span class="eighty"><%= link_to "External Link", @HNexternalLink, target: '_blank' 	     %></span> <% else %> <% end %>
+	<br>
+	<span class="eighty georgia"><span class="siteName">Hacker News</span> &#160; &#160; &#160; <%= link_to @HNnumComments.to_s + ' 	 comments', @HNurl, target: '_blank' %></span>
+	<br>
+	<br>
+	<div class="redditAuthor">
+		&#160; &#160; <%= @HNauthor %> &#160; &#160; <%= @HNpoints %> points &#160; &#160; <%= time_ago_in_words(@HNtime) if 		@time %> ago
+		<br>
+		<br>
+	</div>
+	<div class="redditBody georgia">
+		&#160; &#160; &#160; &#160; <% if @HNcomment %> <%= @HNcomment %> <% else %> "No one has commented yet" <% end %>
+		<br>
+		<br>
+		<br>
+	</div>
+
+
+<%= link_to "Get Another Comment", root_path, class: "btn btn-primary" %>
+</div>

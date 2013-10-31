@@ -1,13 +1,9 @@
 require 'rubygems'
 require 'snoo'
 require 'httparty'
-require 'httpclient'
 require 'youtube_it'
-require 'nokogiri'
-require 'open-uri'
-require 'ruby-hackernews'
 require 'mechanize'
-#require 'quora-client'
+require 'ruby-hackernews'
 
 class PagesController < ApplicationController
   def home
@@ -82,80 +78,19 @@ class PagesController < ApplicationController
 #     
 #       @clicks.update_attribute(:score, @clicks.score += 1)
 #     end
-     # 
-     @agent = Mechanize.new
-     
-     if Rails.cache.read("HNparent").nil?
-       agent = Mechanize.new
-       
-       hnparent = Rails.cache.fetch("HNparent") do
-         RubyHackernews::Entry.all.sample(5)
-       end
-       
-       hncomment = Rails.cache.fetch("HNcomment") do 
-         hncommentsArray = []
-           hnparent.each do |a|
-             url = a.comments_url
-             hncommentsArray.push(agent.get(url).search(".default")[1].to_s)
-           end
-         hncommentsArray
-       end
-       
-       # hncomment = Rails.cache.fetch("HNcomment") do 
-#          hncommentsArray = []
-#            hnparent.each do |a|
-#              url = a.comments_url
-#              hncommentsArray.push(agent.get(url).search(".default")[1].search(".comment").text)
-#            end
-#          hncommentsArray
-#        end
-#        
-#        hnauthor = Rails.cache.fetch("HNauthor") do 
-#          hnauthorsArray = []
-#          agent = Mechanize.new
-#            hnparent.each do |a|
-#              url = a.comments_url
-#              hnauthorsArray.push(agent.get(url).search(".default")[1].search("a").first.text)
-#            end
-#          hnauthorsArray
-#        end
-#        
-#        hntime = Rails.cache.fetch("HNtime") do 
-#          hntimesArray = []
-#          agent = Mechanize.new
-#            hnparent.each do |a|
-#              url = a.comments_url
-#              hntimesArray.push(agent.get(url).search(".comhead").text.split[1..3].join(' '))
-#            end
-#          hntimesArray
-#        end
-       
-       hnparentComment = nil
-     else
-       hnparentComment = Rails.cache.read_multi("HNparent", "HNcomment", "HNauthor", "HNtime")
-     end
-     
-     @HNparent = hnparentComment
-     
-     # Rails.cache.delete("HNparent")
-#      Rails.cache.delete("HNcomment")
-#      Rails.cache.delete("HNauthor")
-#      Rails.cache.delete("HNtime")
-     
-     # @HN = RubyHackernews::Entry.all
- #     @HNparent = @HN.sample
- #     @HNtitle = @HNparent.link.title
- #     @HNexternalLink = @HNparent.link.site
- #     @HNnumComments = @HNparent.comments_count 
- #     @HNpoints = @HNparent.voting.score  
- #     @HNurl = @HNparent.comments_url
- #     
- #     # @HNparentComment = Nokogiri::HTML(open(@HNurl)).css(".default").first
- #     agent = Mechanize.new
-     # @HNparentComment = @agent.get('https://news.ycombinator.com/item?id=6625135').search(".default")[1].search(".comment").text
- #     @HNauthor = @agent.get('https://news.ycombinator.com/item?id=6625135').search(".default")[1].search("a").first.text
- #     @HNtime = @agent.get('https://news.ycombinator.com/item?id=6625135').search(".default")[1].search(".comhead").text.split[1..3].join(' ')
 
+     @HN = RubyHackernews::Entry.all
+     @HNparent = @HN.sample
+     @HNtitle = @HNparent.link.title
+     @HNexternalLink = @HNparent.link.site
+     @HNnumComments = @HNparent.comments_count 
+     @HNpoints = @HNparent.voting.score  
+     @HNurl = @HNparent.comments_url
+     
+     agent = Mechanize.new
+     @HNparentComment = agent.get(@HNurl).search(".default").first
+     @HNauthor = @HNparentComment
+     @HNtime = @HNparentComment
   end
 
   def about

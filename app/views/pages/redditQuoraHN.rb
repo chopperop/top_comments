@@ -83,79 +83,47 @@ class PagesController < ApplicationController
 #       @clicks.update_attribute(:score, @clicks.score += 1)
 #     end
      # 
-     @agent = Mechanize.new
+     @HN = RubyHackernews::Entry.all
+     @HNparent = @HN.sample
+     @HNtitle = @HNparent.link.title
+     @HNexternalLink = @HNparent.link.site
+     @HNnumComments = @HNparent.comments_count 
+     @HNpoints = @HNparent.voting.score  
+     @HNurl = @HNparent.comments_url
      
-     if Rails.cache.read("HNparent").nil?
-       agent = Mechanize.new
-       
-       hnparent = Rails.cache.fetch("HNparent") do
-         RubyHackernews::Entry.all.sample(5)
-       end
-       
-       hncomment = Rails.cache.fetch("HNcomment") do 
-         hncommentsArray = []
-           hnparent.each do |a|
-             url = a.comments_url
-             hncommentsArray.push(agent.get(url).search(".default")[1].to_s)
-           end
-         hncommentsArray
-       end
-       
-       # hncomment = Rails.cache.fetch("HNcomment") do 
-#          hncommentsArray = []
-#            hnparent.each do |a|
-#              url = a.comments_url
-#              hncommentsArray.push(agent.get(url).search(".default")[1].search(".comment").text)
-#            end
-#          hncommentsArray
-#        end
-#        
-#        hnauthor = Rails.cache.fetch("HNauthor") do 
-#          hnauthorsArray = []
-#          agent = Mechanize.new
-#            hnparent.each do |a|
-#              url = a.comments_url
-#              hnauthorsArray.push(agent.get(url).search(".default")[1].search("a").first.text)
-#            end
-#          hnauthorsArray
-#        end
-#        
-#        hntime = Rails.cache.fetch("HNtime") do 
-#          hntimesArray = []
-#          agent = Mechanize.new
-#            hnparent.each do |a|
-#              url = a.comments_url
-#              hntimesArray.push(agent.get(url).search(".comhead").text.split[1..3].join(' '))
-#            end
-#          hntimesArray
-#        end
-       
-       hnparentComment = nil
-     else
-       hnparentComment = Rails.cache.read_multi("HNparent", "HNcomment", "HNauthor", "HNtime")
-     end
+     # @HNparentComment = Nokogiri::HTML(open(@HNurl)).css(".default").first
+     agent = Mechanize.new
+     @HNparentComment = agent.get('https://news.ycombinator.com/item?id=6625135').search(".default")[1]
+     @HNauthor = @HNparentComment
+     @HNtime = @HNparentComment
      
-     @HNparent = hnparentComment
+     # agent = Mechanize.new
+#      page = agent.get('http://www.quora.com/login')
+#      form = page.forms.first
+#      email = form.field_with(:name => "email")
+#      email.value = "david.wu712@gmail.com"
+#      password = form.field_with(:name => "password")
+#      password.value = "david12"
+#      form.submit
+     # form.email = "david.wu712@gmail.com"
+#      form.password = "david12"
+#      @page = agent.submit(form, form.buttons.first)
      
-     # Rails.cache.delete("HNparent")
-#      Rails.cache.delete("HNcomment")
-#      Rails.cache.delete("HNauthor")
-#      Rails.cache.delete("HNtime")
+     #      #@link = agent.page.links[40].attributes
+     #      #@link = agent.page.links_with(:href => '/katieheaney')[0].click.search('#facebook_comments_wrapper')
+     #      @link = page.search('div[id*=container]')[2]# agent = Mechanize.new
      
-     # @HN = RubyHackernews::Entry.all
- #     @HNparent = @HN.sample
- #     @HNtitle = @HNparent.link.title
- #     @HNexternalLink = @HNparent.link.site
- #     @HNnumComments = @HNparent.comments_count 
- #     @HNpoints = @HNparent.voting.score  
- #     @HNurl = @HNparent.comments_url
- #     
- #     # @HNparentComment = Nokogiri::HTML(open(@HNurl)).css(".default").first
- #     agent = Mechanize.new
-     # @HNparentComment = @agent.get('https://news.ycombinator.com/item?id=6625135').search(".default")[1].search(".comment").text
- #     @HNauthor = @agent.get('https://news.ycombinator.com/item?id=6625135').search(".default")[1].search("a").first.text
- #     @HNtime = @agent.get('https://news.ycombinator.com/item?id=6625135').search(".default")[1].search(".comhead").text.split[1..3].join(' ')
-
+      # httpc = HTTPClient.new
+ #      resp = httpc.head('http://www.quora.com/shuffle', :follow_redirect => true)
+ #      @Qurl =  resp.header.request_uri
+ #      page = Nokogiri::HTML(open(@Qurl))
+ #      @Qtitle = page.css('h1').text
+ #      @QnumComments = page.css('span.light a').last.text.split(' ').drop(2).join(' ')
+ #      @Qpoints = page.css('.numbers')[0].text
+ #      @Qcomment = page.css('div[id*=container]')[1].text
+ #      @Qauthor = page.css('.answer_user_wrapper a')[1].css('a').text
+ #      @QauthorText = page.css('.answer_user_wrapper')[1].css('span[id*=full_text_content]').text
+ #      @Qtime = page.css('.answer_permalink')[0].text
   end
 
   def about
