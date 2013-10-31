@@ -89,7 +89,7 @@ class PagesController < ApplicationController
        agent = Mechanize.new
        
        hnparent = Rails.cache.fetch("HNparent") do
-         RubyHackernews::Entry.all.sample
+         RubyHackernews::Entry.all.sample(2)
        end
        
        hncomment = Rails.cache.fetch("HNcomment") do 
