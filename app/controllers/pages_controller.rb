@@ -80,7 +80,7 @@ class PagesController < ApplicationController
     
         @clicks.update_attribute(:score, @clicks.score += 1)
       end      
-    elsif @site < 31
+    else
       if Rails.cache.read("parent_imgur").nil?
         header = { "Authorization" => "Client-ID 297eb3983f1727e" }
         url = "https://api.imgur.com/3/gallery/hot/time.json"
