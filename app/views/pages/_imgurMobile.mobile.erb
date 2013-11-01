@@ -1,0 +1,16 @@
+<span class="oneten georgia"><%= link_to @Ititle, "https://imgur.com/gallery/" + @Iid, target: '_blank' %></span> &#160; &#160; 	 <% if @IpictureLink != nil %> <span class="eighty"><%= link_to "Picture Link", @IpictureLink, target: '_blank' 	     %></span> <% else %> <% end %>
+<br>
+<span class="eighty georgia"><span class="siteNameImgur">Imgur</span> &#160; &#160; &#160; <%= link_to @InumComments.to_s + ' 	 comments', "https://imgur.com/gallery/" + @Iid, target: '_blank' %></span>
+<br>
+<br>
+<div class="ninety redditAuthor">
+	&#160; &#160; <%= @Iauthor %> &#160; &#160; <%= @Ipoints %> points &#160; &#160; <%= time_ago_in_words(@Itime) if 		@Itime %> ago
+	<br>
+	<br>
+</div>
+<div class="redditBodyMobile georgia">
+	&#160; &#160; &#160; &#160; <% if @Icomment %> <%= @Icomment %> <% else %> "No one has commented yet" <% end %>
+	<br>
+	<br>
+	<br>
+</div>
