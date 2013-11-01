@@ -19,6 +19,6 @@ class RedditWorker
       commentsArray.push(reddit.get_comments(link_id: id, sort: "best", limit: 1)[1]["data"]["children"])
     end
     Rails.cache.write("comment_#{sub}", commentsArray)
-    Rails.cache.fetch("expire_#{sub}", expires_in: 30.minutes) { "wait period" }
+    # Rails.cache.fetch("expire_#{sub}", expires_in: 30.minutes) { "wait period" }
   end
 end

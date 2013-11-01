@@ -36,8 +36,12 @@ a {
 	font-size: 120%;
 }
 
-.siteName {
+.siteNameReddit {
 	color: darkred;
+}
+
+.siteNameImgur {
+	color: darkslategray;
 }
 
 body {
