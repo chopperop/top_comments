@@ -6,9 +6,9 @@
 
 <div class="bodyPlacement">	
 
-<% if @site == 0 %>
+<% if @site >= 31 %>
 	<%= render 'reddit' %>
-<% elsif @site == 1 %>
+<% elsif @site < 31 %>
 	<%= render 'imgur' %>
 <% end %>
 

@@ -10,9 +10,9 @@ class PagesController < ApplicationController
     
     @clicks = Comment.first
     
-    @site = rand(0..1)
+    @site = rand(1..100)
     
-    if @site == 0
+    if @site >= 31
       @subreddits = Rails.cache.fetch('subreddits') do 
         ['all', 'drugs', 'AskReddit', 'IAmA', 'bestof', 'nba', 'soccer', 'hockey', 'nfl', 'baseball', 'MMA', 'Music', 'GetMotivated', 'LifeProTips', 'food', 'facepalm', 'Jokes', 'pettyrevenge', 'TalesFromRetail', 'DoesAnybodyElse', 'WTF', 'aww', 'cringe', 'cringepics',  'JusticePorn', 'creepyPMs', 'gaming', 'Games', 'movies', 'funny', 'AdviceAnimals', 'pics', 'videos', 'gifs', 'todayilearned', 'science', 'askscience', 'YouShouldKnow', 'explainlikeimfive', 'trees', 'LifeProTips', 'sex', 'Fitness', 'lifehacks', 'politics', 'worldnews', 'news', 'TrueReddit', 'technology', 'Android', 'programming', 'apple', 'dmt']
       end
@@ -80,7 +80,7 @@ class PagesController < ApplicationController
     
         @clicks.update_attribute(:score, @clicks.score += 1)
       end      
-    elsif @site == 1
+    elsif @site < 31
       if Rails.cache.read("parent_imgur").nil?
         header = { "Authorization" => "Client-ID 297eb3983f1727e" }
         url = "https://api.imgur.com/3/gallery/hot/time.json"
