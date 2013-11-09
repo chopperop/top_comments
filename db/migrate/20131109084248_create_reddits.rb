@@ -2,7 +2,7 @@ class CreateReddits < ActiveRecord::Migration
   def change
     create_table :reddits do |t|
       t.string :subreddit
-      t.string :title
+      t.text :title
       t.integer :numComments
       t.string :url
       t.string :externalLink
