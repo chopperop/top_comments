@@ -6,7 +6,7 @@ class CreateImgurs < ActiveRecord::Migration
       t.string :imgurID
       t.string :pictureLink
       t.string :author
-      t.string :comment
+      t.text :comment
       t.integer :points
       t.string :time
 

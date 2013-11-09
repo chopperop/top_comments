@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131107045438) do
+ActiveRecord::Schema.define(version: 20131109072432) do
 
   create_table "comments", force: true do |t|
     t.string   "name"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20131107045438) do
     t.string   "imgurID"
     t.string   "pictureLink"
     t.string   "author"
-    t.string   "comment"
+    t.text     "comment"
     t.integer  "points"
     t.string   "time"
     t.datetime "created_at"
@@ -34,17 +34,17 @@ ActiveRecord::Schema.define(version: 20131107045438) do
   end
 
   create_table "reddits", force: true do |t|
+    t.string   "subreddit"
     t.string   "title"
     t.integer  "numComments"
     t.string   "url"
     t.string   "externalLink"
     t.string   "author"
-    t.string   "comment"
+    t.text     "comment"
     t.integer  "points"
     t.string   "time"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "subreddit"
   end
 
 end
