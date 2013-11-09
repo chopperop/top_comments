@@ -24,7 +24,7 @@ class ImgurWorker
       if comPar.size != 0
         comArray = comPar[0..2]
         comArray.each do |com|
-          parentPar = parent[x]
+          parentPar = parent[y]
           title = parentPar["title"]
           numComments = com.size
           comID = parentPar["id"]
