@@ -3,7 +3,7 @@
 <span class="eighty georgia"><span class="siteNameImgur">Imgur</span> &#160; &#160; &#160; <%= link_to @InumComments.to_s + ' 	 comments', "https://imgur.com/gallery/" + @Iid, target: '_blank' %> &#160; &#160; &#160; <%= share_link %></span>
 <div id="sharelink" style="display: none;">
 	<br>
-	<span class="eighty georgia"><%= link_to "http://localhost:3000/imgurs/#{@imgurID}", "http://localhost:3000/imgurs/#{@imgurID}", target: '_blank' %></span>
+	<span class="eighty georgia"><% if Rails.env.development? %> <%= link_to "http://localhost:3000/imgurs/#{@imgurID}", "http://localhost:3000/imgurs/#{@imgurID}", target: '_blank' %> <% else %> <%= link_to "http://top-comments.herokuapp.com/imgurs/#{@imgurID}", "http://top-comments.herokuapp.com/imgurs/#{@imgurID}", target: '_blank' %> <% end %></span>
 </div>
 <br>
 <br>
