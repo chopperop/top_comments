@@ -1,3 +1,5 @@
+<div class="bodyPlacementMobile">	
+
 <span class="oneten georgia"><%= link_to @Ititle, "https://imgur.com/gallery/" + @Iid, target: '_blank' %></span> &#160; &#160; 	 <% if @IpictureLink != nil %> <span class="eighty"><%= link_to "Picture Link", @IpictureLink, target: '_blank' 	     %></span> <% else %> <% end %>
 <br>
 <span class="eighty georgia"><span class="siteNameImgur">Imgur</span> &#160; &#160; &#160; <%= link_to @InumComments.to_s + ' 	 comments', "https://imgur.com/gallery/" + @Iid, target: '_blank' %> &#160; &#160; &#160; <%= share_link %></span>
@@ -15,4 +17,7 @@
 	&#160; &#160; &#160; &#160; <% if @Icomment %> <%= markdown(@Icomment) %> <% else %> "No one has commented yet" <% end %>
 	<br>
 	<br>
+</div>
+
+<%= link_to "Get More Comments", root_path, class: "btn btn-primary" %>
 </div>

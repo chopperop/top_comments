@@ -1,16 +1,18 @@
 <span class="onetwenty georgia"><%= link_to @title, "http://www.reddit.com" + @url, target: '_blank' %></span> &#160; &#160; 	 <% if @externalLink != nil %> <span class="eighty"><%= link_to "External Link", @externalLink, target: '_blank' 	     %></span> <% else %> <% end %>
 <br>
-<span class="eighty georgia"><span class="siteNameReddit">Reddit</span> &#160; &#160; &#160; <%= link_to @numComments.to_s + ' 	 comments', "http://www.reddit.com" + @url, target: '_blank' %> &#160; in &#160; <%= @subRand %></span>
+<span class="eighty georgia"><span class="siteNameReddit">Reddit</span> &#160; &#160; &#160; <%= link_to @numComments.to_s + ' 	 comments', "http://www.reddit.com" + @url, target: '_blank' %> &#160; in &#160; <%= @subRand %> &#160; &#160; &#160; <%= share_link %></span> 
+<div id="sharelink" style="display: none;">
+	<br>
+	<span class="eighty georgia"><%= link_to "http://localhost:3000/reddits/#{@redditID}", "http://localhost:3000/reddits/#{@redditID}", target: '_blank' %></span>
+</div>
 <br>
 <br>
 <div class="redditAuthor">
 	&#160; &#160; <%= @author %> &#160; &#160; <%= @points %> points &#160; &#160; <%= time_ago_in_words(@time) if 		@time %> ago
 	<br>
-	<br>
 </div>
 <div class="redditBody georgia">
-	&#160; &#160; &#160; &#160; <% if @comment %> <%= @comment %> <% else %> "No one has commented yet" <% end %>
-	<br>
+	&#160; &#160; &#160; &#160; <% if @comment %> <%= markdown(@comment) %> <% else %> "No one has commented yet" <% end %>
 	<br>
 	<br>
 </div>

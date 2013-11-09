@@ -29,6 +29,8 @@ gem 'youtube_it'
 gem 'ruby-hackernews'
 #gem 'hn2json'
 gem 'quora-client'
+gem 'redcarpet'
+# gem 'protected_attributes'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

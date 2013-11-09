@@ -2,12 +2,9 @@ require 'sidekiq/web'
 
 TopComments::Application.routes.draw do
   
-  get "reddits/index"
-  get "reddits/new"
-  get "reddits/create"
-  get "reddits/show"
-  get "reddits/destroy"
-  get "reddits/reddit_params"
+  resources :reddits
+  resources :imgurs
+  
   root to: 'pages#home'
     
   mount Sidekiq::Web, at: '/sidekiq'
