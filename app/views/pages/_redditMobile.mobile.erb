@@ -6,14 +6,14 @@
 	<span class="eighty georgia"><%= reddit_show_link %></span>
 	<br>
 	<br>
-  	<%= link_to image_tag("/assets/FB15.png"), "http://www.facebook.com/sharer.php?u=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareIcon floatLeft", target: "_blank" %>  
+  	<%= link_to image_tag(asset_path("FB15.png")), "http://www.facebook.com/sharer.php?u=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareIcon floatLeft", target: "_blank" %>  
   	<%= link_to "Share", "http://www.facebook.com/sharer.php?u=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareText floatLeft", target: "_blank"   %>
-  	<%= link_to image_tag("/assets/twitter15.png"), "https://twitter.com/intent/tweet?text=#{@title}&url=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareIcon floatLeft shareLeft", target: "_blank" %>  
+  	<%= link_to image_tag(asset_path("twitter15.png")), "https://twitter.com/intent/tweet?text=#{@title}&url=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareIcon floatLeft shareLeft", target: "_blank" %>  
   	<%= link_to "Tweet", "https://twitter.com/intent/tweet?text=#{@title}&url=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareText floatLeft", target: "_blank" %> 
-	<%= link_to image_tag("/assets/R23.png"), "http://www.reddit.com/submit?url=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareIcon floatLeft shareLeft", target: "_blank" %>
-  	<%= link_to image_tag("/assets/G20.png"), "https://plus.google.com/share?url=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareIcon floatLeft shareLeft", target: "_blank" %> 
-  	<%= link_to image_tag("/assets/L20.png"), "http://www.linkedin.com/shareArticle?url=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}&title=#{@title}", class: "shareIcon floatLeft shareLeft2", target: "_blank" %>  
-  	<%= link_to image_tag("/assets/Email33.png"), "mailto:?subject=#{@title}&body=Hey, check out this awesome comment at  http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareIcon floatLeft shareLeft3 email", target: "_blank" %>
+	<%= link_to image_tag(asset_path("R23.png")), "http://www.reddit.com/submit?url=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareIcon floatLeft shareLeft", target: "_blank" %> 
+  	<%= link_to image_tag(asset_path("G20.png")), "https://plus.google.com/share?url=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareIcon floatLeft shareLeft", target: "_blank" %> 
+  	<%= link_to image_tag(asset_path("L20.png")), "http://www.linkedin.com/shareArticle?url=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}&title=#{@title}", class: "shareIcon floatLeft shareLeft2", target: "_blank" %>  
+  	<%= link_to image_tag(asset_path("Email33.png")), "mailto:?subject=#{@title}&body=Hey, check out this awesome comment at  http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareIcon floatLeft shareLeft3 email", target: "_blank" %>
 </div>
 <br>
 <br>
