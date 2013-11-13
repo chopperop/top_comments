@@ -65,6 +65,7 @@ TopComments::Application.configure do
    #config.assets.precompile += %w( bootstrap-theme.css )
    config.assets.precompile += %w( bootstrap.min.css )
    config.assets.precompile += %w( main.css )
+   config.assets.precompile += %w( shareLinks.js )
    #config.assets.precompile += %w( bootstrap.min.js )
 
   # Ignore bad email addresses and do not raise email delivery errors.

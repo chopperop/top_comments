@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Stumweb: discover some of the best comments on the internet daily</title>
+  <title><%= title %></title>
   <%= stylesheet_link_tag    "bootstrap.min.css", media: "all", "data-turbolinks-track" => true %>
   <%= stylesheet_link_tag    "main.css", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "shareLinks.js", "data-turbolinks-track" => true %>
   <%#= javascript_include_tag "bootstrap.min.js", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <!-- // <script language="javascript" type="text/javascript">setTimeout("location.reload();",2000);</script> -->
 </head>
-<body>
+<body onload="facebook()">
 	<div class="bottomBackground">
 		<div class="container">
 			<div class="bodyWrapper">

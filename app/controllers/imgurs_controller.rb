@@ -11,15 +11,17 @@ class ImgursController < ApplicationController
   def show
     @clicks = Comment.cache_first
     
-    @imgur = Imgur.cached_find(params[:id])
-    @Ititle = @imgur.title
-    @Iid = @imgur.imgurID
-    @InumComments = @imgur.numComments
-    @IpictureLink = @imgur.pictureLink
-    @Iauthor = @imgur.author
-    @Icomment = @imgur.comment
-    @Ipoints = @imgur.points
-    @Itime = @imgur.time
+    @imgurRecord = Imgur.cached_find(params[:id])
+    @imgurID = @imgurRecord.id
+    @pageTitle = @Ititle = @imgurRecord.title
+    @imgurTitle = @Ititle.parameterize
+    @Iid = @imgurRecord.imgurID
+    @InumComments = @imgurRecord.numComments
+    @IpictureLink = @imgurRecord.pictureLink
+    @Iauthor = @imgurRecord.author
+    @Icomment = @imgurRecord.comment
+    @Ipoints = @imgurRecord.points
+    @Itime = @imgurRecord.time
   end
 
   def destroy

@@ -12,17 +12,18 @@ class RedditsController < ApplicationController
   def show
     @clicks = Comment.cache_first
     
-    @reddit = Reddit.cached_find(params[:id])
-    @subRand = @reddit.subreddit
-    @redditID = @reddit.id
-    @title = @reddit.title
-    @numComments = @reddit.numComments
-    @url = @reddit.url
-    @externalLink = @reddit.externalLink
-    @author = @reddit.author
-    @comment = @reddit.comment
-    @points = @reddit.points
-    @time = @reddit.time
+    @redditRecord = Reddit.cached_find(params[:id])
+    @subRand = @redditRecord.subreddit
+    @redditID = @redditRecord.id
+    @pageTitle = @title = @redditRecord.title
+    @redditTitle = @title.parameterize
+    @numComments = @redditRecord.numComments
+    @url = @redditRecord.url
+    @externalLink = @redditRecord.externalLink
+    @author = @redditRecord.author
+    @comment = @redditRecord.comment
+    @points = @redditRecord.points
+    @time = @redditRecord.time
   end
 
   def destroy

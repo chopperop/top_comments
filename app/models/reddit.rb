@@ -5,12 +5,17 @@ class Reddit < ActiveRecord::Base
     Rails.cache.fetch([id, "reddit"]) { find(id) }
   end
 
-  def self.cached_find_by_comment(comment)
-    Rails.cache.fetch(comment) { find_by_comment(comment) }
+  def self.cached_find_by_comment(com)
+    summary = com.split(' ')[0..6].join(' ')
+    Rails.cache.fetch(summary) { find_by_comment(com) }
   end
 
   def flush_cache
     Rails.cache.delete([id, "reddit"])
-    Rails.cache.delete(comment)
+    Rails.cache.delete(comment.split(' ')[0..6].join(' '))
+  end
+  
+  def to_param
+    "#{id}-#{title}".parameterize
   end
 end

@@ -273,3 +273,45 @@ body.bodyMobile {
 .header2Mobile {
 	margin-left: 14.5%;
 }
+
+.floatLeft {
+	float: left;
+}
+
+.shareLeft {
+	margin-left: 10px;
+}
+
+.shareLeft2 {
+	margin-left: 5px;
+}
+
+.shareLeft3 {
+	margin-left: 1px;
+}
+
+.shareLeftFB {
+	margin-left: 50px;
+}
+
+.shareIcon {
+	margin-top: -8px;
+}
+
+.shareText {
+	font-size: 90%;
+	margin-left: 3px;
+}
+
+.email {
+	margin-top: -10px;
+}
+
+.homeButtons li {
+	list-style-type: none;
+	float: left;
+}
+
+.moveLeft {
+	margin-left: -42px;
+}

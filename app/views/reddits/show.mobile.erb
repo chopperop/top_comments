@@ -5,7 +5,17 @@
 <span class="eighty georgia"><span class="siteNameReddit">Reddit</span> &#160; &#160; &#160; <%= link_to @numComments.to_s + ' 	 comments', "http://www.reddit.com" + @url, target: '_blank' %> &#160; in &#160; <%= @subRand %> &#160; &#160; &#160; <%= share_link %></span> 
 <div id="sharelink" style="display: none;">
 	<br>
-	<span class="eighty georgia"><% if Rails.env.development? %> <%= link_to "http://192.168.1.3:3000/reddits/#{@redditID}", "http://192.168.1.3:3000/reddits/#{@redditID}", target: '_blank' %> <% else %> <%= link_to "http://top-comments.herokuapp.com/reddits/#{@redditID}", "http://top-comments.herokuapp.com/reddits/#{@redditID}", target: '_blank' %> <% end %></span>
+	<span class="eighty georgia"><%= reddit_show_link %></span>
+	<br>
+	<br>
+  	<%= link_to image_tag("/assets/FB15.png"), "http://www.facebook.com/sharer.php?u=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareIcon floatLeft", target: "_blank" %>  
+  	<%= link_to "Share", "http://www.facebook.com/sharer.php?u=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareText floatLeft", target: "_blank"   %>
+  	<%= link_to image_tag("/assets/twitter15.png"), "https://twitter.com/intent/tweet?text=#{@title}&url=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareIcon floatLeft shareLeft", target: "_blank" %>  
+  	<%= link_to "Tweet", "https://twitter.com/intent/tweet?text=#{@title}&url=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareText floatLeft", target: "_blank" %> 
+	<%= link_to image_tag("/assets/R23.png"), "http://www.reddit.com/submit?url=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareIcon floatLeft shareLeft", target: "_blank" %>
+  	<%= link_to image_tag("/assets/G20.png"), "https://plus.google.com/share?url=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareIcon floatLeft shareLeft", target: "_blank" %> 
+  	<%= link_to image_tag("/assets/L20.png"), "http://www.linkedin.com/shareArticle?url=http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}&title=#{@title}", class: "shareIcon floatLeft shareLeft2", target: "_blank" %>  
+  	<%= link_to image_tag("/assets/Email33.png"), "mailto:?subject=#{@title}&body=Hey, check out this awesome comment at  http://www.stumweb.com/reddits/#{@redditID}-#{@redditTitle}", class: "shareIcon floatLeft shareLeft3 email", target: "_blank" %>
 </div>
 <br>
 <br>
@@ -19,5 +29,12 @@
 	<br>
 </div>
 
-<%= link_to "Get More Comments", root_path, class: "btn btn-primary" %>
+<ul class="homeButtons">
+	<li class="moveLeft"><%= link_to "Get Another Comment", root_path, class: "btn btn-primary" %></li>
+	<li class="shareLeftFB"> 
+		<div id="fb-root"></div>
+		<div class="fb-like" data-href="https://www.facebook.com/stumweb" data-layout="button_count" data-action="like" 		 data-show-faces="false" data-share="false"></div>
+	</li>
+</ul>
+
 </div>
