@@ -42,7 +42,7 @@ class ImgurWorker
       y += 1
     end
     
-    Imgur.where("created_at <= ?", 1.day.ago).delete_all
+    Imgur.where("created_at <= ?", 2.days.ago).delete_all
     
     # Rails.cache.fetch("expire_imgur", expires_in: 4.minutes) { "wait period" }
   end

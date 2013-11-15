@@ -66,12 +66,12 @@ class PagesController < ApplicationController
         parentComment = nil
         if Rails.cache.read("expire_#{@subRand}").nil?
           RedditWorker.perform_in(1.minute, @subRand)
-          Rails.cache.fetch("expire_#{@subRand}", expires_in: 46.minutes) { "wait period" }
+          Rails.cache.fetch("expire_#{@subRand}", expires_in: 31.minutes) { "wait period" }
         end
       else
         if Rails.cache.read("expire_#{@subRand}").nil?
           RedditWorker.perform_in(1.minute, @subRand)
-          Rails.cache.fetch("expire_#{@subRand}", expires_in: 46.minutes) { "wait period" }
+          Rails.cache.fetch("expire_#{@subRand}", expires_in: 31.minutes) { "wait period" }
         end
         parentComment = Rails.cache.read_multi("parent_#{@subRand}", "comment_#{@subRand}")
       end

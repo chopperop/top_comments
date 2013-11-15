@@ -46,7 +46,7 @@ class RedditWorker
       x += 1
     end
     
-    Reddit.where("created_at <= ?", 1.day.ago).delete_all
+    Reddit.where("created_at <= ?", 2.days.ago).delete_all
     
     # Rails.cache.fetch("expire_#{sub}", expires_in: 30.minutes) { "wait period" }
   end
