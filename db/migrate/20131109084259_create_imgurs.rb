@@ -1,12 +1,12 @@
 class CreateImgurs < ActiveRecord::Migration
   def change
     create_table :imgurs do |t|
-      t.text :title
+      t.text :title, :limit => nil
       t.integer :numComments
       t.string :imgurID
       t.string :pictureLink
       t.string :author
-      t.text :comment
+      t.text :comment, :limit => nil
       t.integer :points
       t.string :time
 

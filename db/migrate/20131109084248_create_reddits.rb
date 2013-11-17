@@ -2,12 +2,12 @@ class CreateReddits < ActiveRecord::Migration
   def change
     create_table :reddits do |t|
       t.string :subreddit
-      t.text :title
+      t.text :title, :limit => nil
       t.integer :numComments
       t.string :url
       t.string :externalLink
       t.string :author
-      t.text :comment
+      t.text :comment, :limit => nil
       t.integer :points
       t.string :time
 
