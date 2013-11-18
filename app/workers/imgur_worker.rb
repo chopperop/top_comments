@@ -26,7 +26,7 @@ class ImgurWorker
         comArray.each do |com|
           parentPar = parent[y]
           title = parentPar["title"]
-          numComments = com.size
+          numComments = comPar.size
           comID = parentPar["id"]
           pictureLink = parentPar["link"]
         
