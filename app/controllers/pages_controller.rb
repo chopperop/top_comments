@@ -161,12 +161,12 @@ class PagesController < ApplicationController
         parentComment = nil
         if Rails.cache.read("expire_imgur").nil?
           ImgurWorker.perform_in(1.minute)
-          Rails.cache.fetch("expire_imgur", expires_in: 11.minutes) { "wait period" }
+          Rails.cache.fetch("expire_imgur", expires_in: 6.minutes) { "wait period" }
         end
       else
         if Rails.cache.read("expire_imgur").nil?
           ImgurWorker.perform_in(1.minute)
-          Rails.cache.fetch("expire_imgur", expires_in: 11.minutes) { "wait period" }
+          Rails.cache.fetch("expire_imgur", expires_in: 6.minutes) { "wait period" }
         end
         parentComment = Rails.cache.read_multi("parent_imgur", "comment_imgur")
       end
